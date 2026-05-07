@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Павел Осадчик — аналитик процессов, регламентов и автоматизации. Сайт-визитка с описанием услуг, подхода и рабочих зон.">
+  <title>Павел Осадчик — аналитик процессов и автоматизации</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/animations.css">
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#hero" class="logo">
+        <span class="logo-bold">Павел</span><span class="logo-thin"> Осадчик</span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#about-me" class="nav-link">Кто я</a>
+        <a href="#what-i-do" class="nav-link">Что я делаю</a>
+        <a href="#strengths" class="nav-link">Сильные стороны</a>
+        <a href="#work-zones" class="nav-link">Рабочие зоны</a>
+        <a href="#contact" class="nav-link">Контакт</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary nav-cta">Написать мне</a>
+      <button class="burger" id="burger" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#about-me" class="mobile-nav-link">Кто я</a>
+      <a href="#what-i-do" class="mobile-nav-link">Что я делаю</a>
+      <a href="#strengths" class="mobile-nav-link">Сильные стороны</a>
+      <a href="#work-zones" class="mobile-nav-link">Рабочие зоны</a>
+      <a href="#contact" class="mobile-nav-link">Контакт</a>
+      <a href="#contact" class="btn btn-primary">Написать мне</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge reveal">Личный сайт-визитка</div>
+          <h1 class="hero-title">
+            <span class="reveal-line">Павел Осадчик</span>
+            <span class="reveal-line blue">Аналитик процессов,</span>
+            <span class="reveal-line">регламентов и автоматизации</span>
+          </h1>
+          <p class="hero-sub reveal">Я превращаю хаос задач, идей и технических деталей в понятные системы, документы и рабочие процессы.</p>
+          <div class="hero-cta reveal">
+            <a href="#contact" class="btn btn-primary btn-lg">Связаться</a>
+            <a href="#about-me" class="btn btn-ghost btn-lg">Подробнее обо мне</a>
+          </div>
+          <div class="hero-notes reveal">
+            <span class="pill">процессы · регламенты · автоматизация · ясность · внедрение</span>
+          </div>
+        </div>
+        <div class="hero-3d">
+          <canvas id="hero-canvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ME ═══ -->
+    <section class="about-me" id="about-me">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">Кто я</span>
+          <h2 class="section-title reveal">Работаю на стыке анализа, коммуникации и внедрения.</h2>
+        </div>
+        <p class="reveal">Моя главная роль — соединять бизнес, людей и технологии. Помогаю сделать процессы понятными не только для разработчиков, но и для руководителей, команды и заказчиков.</p>
+        <div class="info-grid">
+          <div class="info-card reveal">
+            <h3>Системный взгляд</h3>
+            <p>Вижу общую систему, а не только отдельные задачи. Помогаю находить связи, зависимости и точки перегруза.</p>
+          </div>
+          <div class="info-card reveal">
+            <h3>Перевожу сложное</h3>
+            <p>Перевожу технические и управленческие детали на понятный язык, чтобы команда могла двигаться вперёд вместе.</p>
+          </div>
+          <div class="info-card reveal">
+            <h3>Упаковка для применения</h3>
+            <p>Упаковываю решения так, чтобы ими можно было пользоваться — не только читать, но и внедрять.</p>
+          </div>
+          <div class="info-card reveal">
+            <h3>Документы и сценарии</h3>
+            <p>Довожу идеи до рабочих документов, схем, инструкций и сценариев внедрения.</p>
+          </div>
+        </div>
+        <div class="section-photo reveal">
+          <img src="My/628f029f-2728-48b7-b4ea-bb44c4351c47.png" alt="Павел Осадчик">
+        </div>
+      </div>
+    </section>
+
+    <section class="wwd" id="what-i-do">
+      <canvas id="blob-canvas"></canvas>
+      <div class="container wwd-inner">
+        <div class="wwd-headline">
+          <h2 class="wwd-title">
+            <span class="reveal-line">Навожу порядок</span>
+            <span class="reveal-line">там, где всё разрозненно.</span>
+          </h2>
+          <p class="wwd-sub reveal">Я беру хаотичные задачи, разговоры, идеи, интервью, документы и технические детали и превращаю их в понятную рабочую структуру.</p>
+        </div>
+        <div class="wwd-cards">
+          <div class="wwd-card reveal">
+            <div class="wwd-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M14 8v6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Сбор требований</h3>
+            <p>Собираю факты, интервью, документы и боли, чтобы увидеть рабочую картину и выстроить структуру.</p>
+          </div>
+          <div class="wwd-card reveal">
+            <div class="wwd-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <rect x="3" y="10" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="18" y="10" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="10.5" y="3" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="10.5" y="18" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M10 13.5H7M21 13.5h-3M14 10V7M14 21v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Регламенты и инструкции</h3>
+            <p>Описываю процессы, регламенты и инструкции, чтобы работа стала понятной, прозрачной и повторяемой.</p>
+          </div>
+          <div class="wwd-card reveal">
+            <div class="wwd-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path d="M5 20l5-6 4 4 9-11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 3"/>
+              </svg>
+            </div>
+            <h3>Автоматизация</h3>
+            <p>Помогаю внедрять инструменты, которые снимают рутину и делают процесс управляемым.</p>
+          </div>
+        </div>
+        <div class="section-photo reveal">
+          <img src="My/7005f966-789d-4079-ade2-2b3d33c61050.png" alt="Павел Осадчик">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ STRENGTHS ═══ -->
+    <section class="solutions" id="strengths">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">Сильные стороны</span>
+          <h2 class="section-title reveal">Реалистичный подход к сложным задачам</h2>
+        </div>
+        <div class="solutions-grid">
+
+          <div class="solution-card reveal">
+            <div class="solution-num">01</div>
+            <div class="solution-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                <path d="M7 25L14 18l5 5 9-11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="7" cy="25" r="2" fill="currentColor"/>
+                <circle cx="14" cy="18" r="2" fill="currentColor"/>
+                <circle cx="19" cy="23" r="2" fill="currentColor"/>
+                <circle cx="28" cy="12" r="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Системное мышление</h3>
+            <p>Вижу общую картину, связи, зависимости и слабые места, которые влияют на результат.</p>
+          </div>
+
+          <div class="solution-card reveal">
+            <div class="solution-num">02</div>
+            <div class="solution-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                <path d="M5 9a4 4 0 014-4h18a4 4 0 014 4v14a4 4 0 01-4 4H13l-8 6V9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M11 16h14M11 21h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Структура без сложности</h3>
+            <p>Разбиваю сложное на понятные блоки, роли, шаги и правила, не перегружая процесс.</p>
+          </div>
+
+          <div class="solution-card reveal">
+            <div class="solution-num">03</div>
+            <div class="solution-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                <rect x="5" y="5" width="11" height="11" rx="3" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="20" y="5" width="11" height="11" rx="3" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="5" y="20" width="11" height="11" rx="3" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="20" y="20" width="11" height="11" rx="3" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <h3>Критический взгляд</h3>
+            <p>Не поддаюсь формальным шаблонам — проверяю, будет ли решение работать в жизни.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ WORK ZONES ═══ -->
+    <section class="cases" id="work-zones">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">Рабочие зоны</span>
+          <h2 class="section-title reveal">Технологии и документы, которые делают работу понятнее.</h2>
+        </div>
+        <div class="section-photo reveal">
+          <img src="My/fb170a92-9674-4014-875a-321181b4ef58.png" alt="Павел Осадчик">
+        </div>
+        <div class="cases-grid">
+
+          <div class="case-card reveal">
+            <div class="case-top">
+              <span class="case-company">YouGile</span>
+              <div class="case-tags">
+                <span class="tag">Задачи</span>
+                <span class="tag">Контроль</span>
+              </div>
+            </div>
+            <div class="case-metric">Прозрачность</div>
+            <p class="case-desc">Выстраиваю прозрачные потоки задач, контроль исполнения и ясность ответственности.</p>
+          </div>
+
+          <div class="case-card reveal">
+            <div class="case-top">
+              <span class="case-company">n8n + Telegram</span>
+              <div class="case-tags">
+                <span class="tag">Автоматизация</span>
+                <span class="tag">Интерфейсы</span>
+              </div>
+            </div>
+            <div class="case-metric">Ускорение</div>
+            <p class="case-desc">Связываю сервисы и формирую удобные интерфейсы, чтобы рутинные действия выполнялись быстрее и без ошибок.</p>
+          </div>
+
+          <div class="case-card reveal">
+            <div class="case-top">
+              <span class="case-company">ИИ и регламенты</span>
+              <div class="case-tags">
+                <span class="tag">Анализ</span>
+                <span class="tag">Документы</span>
+              </div>
+            </div>
+            <div class="case-metric">Понятность</div>
+            <p class="case-desc">Строю проекты на рабочих правилах и документах, а не на красивой теории.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VALUE ═══ -->
+    <section class="clients" id="value">
+      <div class="container">
+        <h2 class="clients-title reveal">Меньше ручной работы. Больше ясности. Быстрее движение к результату.</h2>
+      </div>
+      <div class="marquee-track">
+        <div class="marquee-inner">
+          <span class="marquee-item">меньше ручной рутины</span>
+          <span class="marquee-dot">·</span>
+          <span class="marquee-item">больше прозрачности</span>
+          <span class="marquee-dot">·</span>
+          <span class="marquee-item">быстрее движение к результату</span>
+          <span class="marquee-dot">·</span>
+          <span class="marquee-item">команда понимает, что и зачем делает</span>
+          <span class="marquee-dot">·</span>
+          <span class="marquee-item">руководитель видит реальную картину</span>
+          <span class="marquee-dot">·</span>
+          <span class="marquee-item">задачи не теряются в переписках</span>
+          <span class="marquee-dot">·</span>
+          <span class="marquee-item">решения становятся повторяемыми</span>
+          <span class="marquee-dot">·</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section class="about" id="approach">
+      <div class="container about-inner">
+        <div class="about-content">
+          <span class="section-label reveal">Мой подход</span>
+          <h2 class="section-title reveal">Сначала понять. Потом автоматизировать.</h2>
+          <p class="about-text reveal">Я не начинаю с кнопок, сервисов и модных инструментов. Сначала нужно понять, что происходит в реальности, кто за что отвечает, где входы и выходы процесса и где теряются задачи.</p>
+          <p class="about-text reveal">Мой алгоритм: собрать факты, разложить хаос на этапы, описать рабочие правила, автоматизировать там, где это действительно снимает боль, и внедрить так, чтобы решением пользовались.</p>
+          <div class="stats">
+            <div class="stat reveal">
+              <div class="stat-val">
+                <span class="stat-num" data-target="5">0</span><span class="stat-sfx">+</span>
+              </div>
+              <div class="stat-label">направлений</div>
+            </div>
+            <div class="stat reveal">
+              <div class="stat-val">
+                <span class="stat-num" data-target="7">0</span>
+              </div>
+              <div class="stat-label">инструментов</div>
+            </div>
+            <div class="stat reveal">
+              <div class="stat-val">
+                <span class="stat-num" data-target="100">0</span><span class="stat-sfx">%</span>
+              </div>
+              <div class="stat-label">практический фокус</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-3d">
+          <canvas id="about-canvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-left">
+            <h2 class="contact-title reveal">Готовы упорядочить процессы?</h2>
+            <p class="contact-sub reveal">Напишите мне, и я помогу сформировать понятную структуру, рабочие правила и путь к автоматизации.</p>
+            <div class="contact-links reveal">
+              <a href="mailto:hello@osadchik.ai" class="contact-link">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <rect x="1.5" y="3.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/>
+                  <path d="M1.5 6.5l7.5 5 7.5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+                hello@osadchik.ai
+              </a>
+              <a href="https://t.me/osadchik" class="contact-link">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M2 8.8L15.5 3.5l-2.7 11.7-4-3.1-2 2 .4-4L13 5.5 6.5 9.5 3 8.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                </svg>
+                @osadchik
+              </a>
+            </div>
+          </div>
+          <form class="contact-form reveal" id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" placeholder="Имя" required>
+              </div>
+              <div class="form-group">
+                <input type="email" placeholder="Email" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Компания">
+            </div>
+            <div class="form-group">
+              <textarea placeholder="Расскажите о вашей задаче" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-accent btn-full">Отправить заявку</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#hero" class="logo footer-logo">
+            <span class="logo-bold">Павел</span><span class="logo-thin"> Осадчик</span>
+          </a>
+          <p class="footer-tagline">Прозрачные процессы, понятные регламенты, рабочая автоматизация.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>Навигация</h4>
+            <a href="#about-me">Кто я</a>
+            <a href="#what-i-do">Что я делаю</a>
+            <a href="#strengths">Сильные стороны</a>
+          </div>
+          <div class="footer-col">
+            <h4>Инструменты</h4>
+            <a href="#work-zones">YouGile</a>
+            <a href="#work-zones">n8n</a>
+            <a href="#work-zones">Telegram</a>
+          </div>
+          <div class="footer-col">
+            <h4>Контакт</h4>
+            <a href="mailto:hello@osadchik.ai">hello@osadchik.ai</a>
+            <a href="https://t.me/osadchik">@osadchik</a>
+          </div>
+        </div>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="LinkedIn">LI</a>
+          <a href="#" class="social-link" aria-label="GitHub">GH</a>
+          <a href="#" class="social-link" aria-label="Telegram">TG</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Павел Осадчик. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/three-scenes.js"></script>
+  <script src="js/gsap-animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

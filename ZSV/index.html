@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сергей Захаров — предприниматель, эксперт и спикер</title>
+<meta name="description" content="26 лет в строительстве. Полный цикл строительных проектов: от идеи, земли и проектирования до экспертизы, строительства, ввода и запуска работающего объекта.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Montserrat:ital,wght@1,800;1,900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --cream:#FAF8F2;
+  --stone:#d8d4c8;
+  --stone-soft:#e0dccd;
+  --graphite:#0F0F0F;
+  --graphite-2:#1a1a1a;
+  --text-2:#5b5b5b;
+  --text-3:#6b6b6b;
+  --text-4:#8a8a8a;
+  --obsidian:#0E0E0E;
+  --footer-bg:#080808;
+  --dark-card:#141414;
+  --dark-divider:#2a2a2a;
+  --dark-divider-2:#3a3a3a;
+  --ivory:#F5F1E6;
+  --ivory-2:#a8a8a8;
+  --gold:#C9A961;
+  --gold-glow:rgba(201,169,97,0.7);
+  --gold-bg:rgba(201,169,97,0.08);
+  --warning-bg:#7a3a1a;
+  --content-max:1280px;
+  --content-narrow:1080px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;color:var(--graphite);background:var(--obsidian);line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* Transition strips between sections */
+.strip{padding:18px 56px;font-size:11px;font-weight:500;letter-spacing:1.5px;display:flex;justify-content:space-between;align-items:center}
+.strip-light{background:var(--cream);color:var(--text-3);border-bottom:1px solid var(--stone)}
+.strip-light + section{border-top:none}
+.strip-dark{background:var(--obsidian);color:var(--gold)}
+.strip-dark .strip-num{color:var(--text-4)}
+.strip-light .strip-num{color:var(--text-3)}
+
+/* Section base */
+section{padding:96px 56px 88px}
+.container{max-width:var(--content-max);margin:0 auto}
+.container-narrow{max-width:var(--content-narrow);margin:0 auto}
+
+.dark{background:var(--obsidian);color:var(--ivory)}
+.light{background:var(--cream);color:var(--graphite)}
+
+/* Section header (overline + title + side text) */
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;gap:48px;flex-wrap:wrap}
+.overline{font-size:11px;font-weight:600;letter-spacing:3px;margin-bottom:18px}
+.dark .overline{color:var(--gold)}
+.light .overline{color:var(--text-4)}
+.section-title{font-size:56px;font-weight:900;line-height:1.0;letter-spacing:-1.6px}
+.section-side{font-size:13px;line-height:1.55;max-width:340px;text-align:right}
+.dark .section-side{color:var(--ivory-2)}
+.light .section-side{color:var(--text-3)}
+.gold{color:var(--gold)}
+.muted-strike{font-weight:400;font-style:italic;color:var(--text-4)}
+
+/* Buttons / CTA */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:0.8px;cursor:pointer;transition:all 0.25s ease}
+.btn-gold{background:var(--gold);color:var(--obsidian)}
+.btn-gold:hover{background:#d6b870;transform:translateY(-1px)}
+.btn-ghost-gold{border:1px solid var(--gold);color:var(--gold);font-weight:600}
+.btn-ghost-gold:hover{background:rgba(201,169,97,0.08)}
+.btn-dark-gold{background:var(--obsidian);color:var(--gold)}
+.btn-dark-gold:hover{background:#1f1f1f}
+.btn-large{padding:18px 32px;font-size:13px;font-weight:800;letter-spacing:1px}
+
+/* ============================================================
+   01 — HERO
+   ============================================================ */
+#hero{padding:48px 56px 56px;min-height:600px}
+.hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:end}
+.hero-overline{font-size:11px;color:var(--gold);letter-spacing:3px;font-weight:600;margin-bottom:32px}
+.hero-title{font-size:64px;line-height:0.98;font-weight:900;letter-spacing:-2px;margin-bottom:18px;color:var(--ivory)}
+.hero-title-2{font-size:64px;line-height:0.98;font-weight:900;letter-spacing:-2px;margin-bottom:36px;color:var(--gold)}
+.hero-sub{font-weight:400;font-size:14px;color:var(--ivory-2);line-height:1.6;max-width:480px;margin-bottom:28px}
+.hero-cta-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.hero-stats{display:flex;gap:32px;margin-top:48px;padding-top:24px;border-top:1px solid var(--dark-divider)}
+.hero-stat-num{font-size:28px;color:var(--ivory);font-weight:800;letter-spacing:-1px;line-height:1}
+.hero-stat-label{font-size:10px;color:var(--text-4);letter-spacing:1.5px;margin-top:4px;font-weight:500}
+.hero-photo-wrap{height:520px;position:relative;overflow:hidden;margin-bottom:108px}
+.hero-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;filter:contrast(1.04) brightness(0.96)}
+.hero-photo-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,14,0) 65%,rgba(14,14,14,0.55) 100%);pointer-events:none}
+.hero-photo-caption{position:absolute;left:18px;bottom:18px;color:var(--gold);font-size:10px;letter-spacing:2.5px;font-weight:600}
+
+/* ============================================================
+   02 — О Сергее, цитата
+   ============================================================ */
+.q-overlines{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:48px;font-size:11px;font-weight:600;letter-spacing:3px;color:var(--text-4)}
+.quote{font-size:72px;line-height:1.04;font-weight:900;letter-spacing:-2.5px;font-style:italic;max-width:980px;margin-bottom:64px}
+.quote .gold{color:var(--gold)}
+.quote-divider{height:1px;background:linear-gradient(90deg,var(--gold) 0%,var(--gold) 80px,transparent 80px);margin:48px 0 56px}
+.signature-grid{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start}
+.signature-photo{width:100%;aspect-ratio:4/5;position:relative;overflow:hidden;margin-bottom:20px}
+.signature-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%;filter:contrast(1.04)}
+.signature-name{font-size:15px;font-weight:800;color:var(--graphite);letter-spacing:-0.3px;margin-bottom:6px}
+.signature-role{font-size:11px;line-height:1.55;color:var(--text-3);font-weight:500;margin-bottom:20px}
+.regalia{display:flex;flex-direction:column;gap:10px}
+.regalia-item{font-size:9px;letter-spacing:2px;font-weight:600;color:var(--graphite);border-left:2px solid var(--gold);padding-left:10px;line-height:1.4}
+.bio{font-weight:400;font-size:17px;line-height:1.65;color:var(--graphite-2)}
+.bio p{margin:0 0 22px}
+.bio .citation{font-size:14px;color:var(--text-3);font-style:italic;border-top:1px solid var(--stone);padding-top:18px;margin-top:0}
+
+/* ============================================================
+   03 — Полный цикл (горизонтальная шкала)
+   ============================================================ */
+.lifecycle-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;gap:48px;flex-wrap:wrap}
+.lifecycle-counter{text-align:right;font-size:11px;letter-spacing:1.5px;font-weight:500;color:var(--ivory-2);line-height:1.8}
+.lifecycle-counter b{color:var(--ivory);font-weight:700}
+.lifecycle-counter .gold-b{color:var(--gold);font-weight:700}
+.scale-wrap{margin-top:24px}
+.scale-row{display:grid;grid-template-columns:repeat(13,1fr);min-height:96px}
+.scale-row-top{align-items:end}
+.scale-row-bottom{align-items:start}
+.stage-label{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.stage-num{font-size:9px;font-weight:600;letter-spacing:1.5px}
+.stage-num.muted{color:var(--ivory-2)}
+.stage-num.warn{color:var(--gold);font-weight:700}
+.stage-num.star{color:var(--gold);font-weight:800}
+.stage-text{font-size:10px;font-weight:700;line-height:1.15}
+.stage-text.regular{color:var(--ivory)}
+.stage-text.warn{color:var(--gold);font-weight:800}
+.stage-text.star{color:var(--gold);font-weight:900;text-transform:uppercase}
+.stage-tick{width:1px;height:20px;background:var(--dark-divider-2);margin-top:4px}
+.stage-tick.warn{background:var(--gold)}
+.stage-tick.bottom{margin-top:0;margin-bottom:4px}
+.scale-line-row{position:relative;height:28px;display:flex;align-items:center}
+.scale-line{position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,var(--gold) 0%,var(--gold) 92%,var(--ivory) 100%);transform:translateY(-50%)}
+.dots-row{display:grid;grid-template-columns:repeat(13,1fr);width:100%;position:relative}
+.dot-cell{display:flex;justify-content:center;z-index:1}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--obsidian);border:1px solid var(--gold)}
+.dot.start{width:9px;height:9px;background:var(--ivory);border:2px solid var(--obsidian);box-shadow:0 0 0 1px var(--gold)}
+.dot.warn{width:13px;height:13px;background:var(--gold);border:2px solid var(--obsidian)}
+.dot.final{width:14px;height:14px;background:var(--gold);border:2px solid var(--obsidian);box-shadow:0 0 18px var(--gold-glow)}
+.warning-cards{margin-top:80px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding-top:32px;border-top:1px solid var(--dark-divider)}
+.warning-cards-item-title{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:10px}
+.warning-cards-item-text{font-size:13px;color:var(--ivory-2);line-height:1.55;font-weight:400}
+
+/* ============================================================
+   04 — Услуги (3x2)
+   ============================================================ */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--stone);border:1px solid var(--stone)}
+.service-card{background:var(--cream);padding:32px 28px;display:flex;flex-direction:column;min-height:280px;position:relative;transition:all 0.3s ease;cursor:pointer}
+.service-card:hover{background:var(--obsidian);color:var(--ivory)}
+.service-card:hover .service-title{color:var(--ivory)}
+.service-card:hover .service-desc{color:var(--ivory-2)}
+.service-card:hover .service-foot{border-top-color:var(--dark-divider);color:var(--gold)}
+.service-card:hover .service-foot-arrow{color:var(--gold)}
+.service-card:hover::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold)}
+.service-card:hover .service-arrow{content:"↗";color:var(--gold);opacity:1}
+.service-head-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
+.service-num{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--gold)}
+.service-arrow{font-size:18px;color:var(--graphite);opacity:0.3;transition:all 0.25s ease}
+.service-title{font-size:22px;font-weight:900;line-height:1.05;letter-spacing:-0.6px;margin-bottom:14px;color:var(--graphite)}
+.service-desc{font-size:13px;color:var(--text-2);line-height:1.55;font-weight:400;margin-bottom:auto}
+.service-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--stone-soft);font-size:10px;font-weight:600;letter-spacing:2px;color:var(--graphite);display:flex;justify-content:space-between;transition:all 0.25s ease}
+.service-foot-arrow{color:var(--gold);transition:all 0.25s ease}
+.services-bottom{margin-top:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.services-bottom-text{font-size:13px;color:var(--text-3);font-weight:500}
+
+/* ============================================================
+   05 — Кейсы
+   ============================================================ */
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.case-card{background:var(--dark-card);padding:32px 28px 28px;display:flex;flex-direction:column;min-height:420px;border:1px solid var(--dark-divider);transition:all 0.3s ease}
+.case-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.case-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px}
+.case-label{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold)}
+.case-meta{font-size:9px;color:var(--text-4);letter-spacing:1.5px;font-weight:500;text-align:right;line-height:1.4}
+.case-industry{font-size:13px;color:var(--ivory-2);letter-spacing:0.5px;font-weight:500;margin-bottom:6px}
+.case-name{font-size:22px;font-weight:900;line-height:1.1;color:var(--ivory);letter-spacing:-0.5px;margin-bottom:24px}
+.case-body{margin-top:auto}
+.case-divider{height:1px;background:var(--dark-divider);margin-bottom:20px}
+.case-metric{font-size:48px;font-weight:900;color:var(--gold);letter-spacing:-1.5px;line-height:1;margin-bottom:6px}
+.case-metric-label{font-size:11px;color:var(--ivory-2);letter-spacing:1.5px;font-weight:500;margin-bottom:18px}
+.case-desc{font-size:12px;color:var(--ivory-2);line-height:1.55;font-weight:400;margin-bottom:18px}
+.case-tags{display:flex;gap:6px;flex-wrap:wrap}
+.case-tag{font-size:9px;color:var(--gold);border:1px solid var(--dark-divider-2);padding:3px 8px;letter-spacing:0.8px;font-weight:600}
+.cases-bottom{margin-top:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;padding-top:32px;border-top:1px solid var(--dark-divider);flex-wrap:wrap}
+.cases-bottom-text{font-size:13px;color:var(--ivory-2);font-weight:500;line-height:1.5;max-width:540px}
+.cases-cta-row{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ============================================================
+   06 — Выступления
+   ============================================================ */
+.speak-head{margin-bottom:64px}
+.speak-grid{display:grid;grid-template-columns:0.65fr 1.35fr;gap:56px}
+.speak-grid > div{display:flex;flex-direction:column}
+.speak-photo{width:100%;aspect-ratio:4/5;position:relative;overflow:hidden;margin-bottom:20px}
+.speak-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%;filter:contrast(1.04)}
+.speak-caption{font-size:11px;color:var(--text-4);letter-spacing:1.5px;font-weight:500;margin-bottom:24px}
+.speak-stats{display:flex;gap:24px;padding-top:20px;border-top:1px solid var(--stone);margin-top:auto}
+.speak-stat-num{font-size:32px;font-weight:900;color:var(--graphite);letter-spacing:-1px;line-height:1}
+.speak-stat-label{font-size:9px;color:var(--text-3);letter-spacing:1.5px;font-weight:600;margin-top:4px;line-height:1.3}
+.speak-intro{font-size:13px;color:var(--text-2);line-height:1.65;font-weight:400;margin-bottom:32px;max-width:520px}
+.topics-list{border-top:1px solid var(--stone)}
+.topic{display:flex;align-items:baseline;gap:18px;padding:18px 0;border-bottom:1px solid var(--stone-soft);transition:all 0.25s ease;cursor:pointer}
+.topic:hover{background:var(--gold-bg);border-left:2px solid var(--gold);padding-left:14px;margin-left:-16px}
+.topic:hover .topic-arrow{color:var(--gold);opacity:1}
+.topic:last-child{border-bottom:none}
+.topic-num{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1.5px;min-width:24px}
+.topic-text{flex:1;font-size:17px;font-weight:700;color:var(--graphite);letter-spacing:-0.3px}
+.topic-arrow{font-size:14px;color:var(--graphite);opacity:0.4;transition:all 0.25s ease}
+.speak-bottom{margin-top:auto;padding-top:36px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.speak-bottom-text{font-size:12px;color:var(--text-3);font-weight:500;line-height:1.5}
+
+/* ============================================================
+   07 — Подход (3 принципа)
+   ============================================================ */
+.principle{display:grid;grid-template-columns:200px 1fr;gap:48px;align-items:start;padding:48px 0;border-top:1px solid var(--dark-divider)}
+.principle:last-of-type{border-bottom:1px solid var(--dark-divider)}
+.principle-roman{font-size:140px;line-height:0.85;font-weight:900;color:var(--gold);letter-spacing:-4px;font-style:italic}
+.principle-overline{font-size:11px;font-weight:600;letter-spacing:3px;color:var(--ivory-2);margin-bottom:14px}
+.principle-title{font-size:48px;font-weight:900;line-height:1.0;letter-spacing:-1.4px;color:var(--ivory);margin-bottom:24px}
+.principle-text{font-size:18px;font-weight:400;color:var(--ivory-2);line-height:1.6;max-width:680px}
+.approach-bottom{margin-top:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.approach-quote{font-size:13px;color:var(--ivory-2);font-weight:500;line-height:1.5;max-width:540px;font-style:italic}
+
+/* ============================================================
+   08 — Для кого
+   ============================================================ */
+.audience-group-label{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--gold);margin-bottom:18px}
+.audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--stone);border:1px solid var(--stone);margin-bottom:48px}
+.audience-grid:last-of-type{margin-bottom:0}
+.audience-card{background:var(--cream);padding:28px 24px 24px;display:flex;flex-direction:column;min-height:200px;transition:all 0.3s ease;cursor:pointer}
+.audience-card:hover{background:var(--obsidian);color:var(--ivory)}
+.audience-card:hover .audience-name{color:var(--ivory)}
+.audience-card:hover .audience-pain{color:var(--ivory-2);border-left-color:var(--gold)}
+.audience-card:hover .audience-arrow{color:var(--gold);opacity:1}
+.audience-head-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.audience-num{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--gold)}
+.audience-arrow{font-size:14px;color:var(--graphite);opacity:0.3;transition:all 0.25s ease}
+.audience-name{font-size:18px;font-weight:900;line-height:1.1;color:var(--graphite);letter-spacing:-0.4px;margin-bottom:14px}
+.audience-pain{font-size:12px;color:var(--text-2);line-height:1.5;font-weight:400;font-style:italic;margin-top:auto;border-left:2px solid var(--gold);padding-left:10px}
+.audience-bottom{margin-top:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.audience-bottom-text{font-size:13px;color:var(--text-3);font-weight:500;line-height:1.5}
+
+/* ============================================================
+   09 — Заявка (форма)
+   ============================================================ */
+.form-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start}
+.form-left .section-title{margin-bottom:24px}
+.form-sub{font-size:15px;font-weight:400;color:var(--ivory-2);line-height:1.6;max-width:420px;margin-bottom:48px}
+.trust{border-top:1px solid var(--dark-divider);padding-top:28px}
+.trust-list{display:flex;flex-direction:column;gap:18px}
+.trust-item{display:flex;align-items:flex-start;gap:14px}
+.trust-icon{width:24px;height:24px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:var(--gold);font-weight:700}
+.trust-title{font-size:13px;font-weight:700;color:var(--ivory);margin-bottom:4px}
+.trust-text{font-size:11px;color:var(--text-4);line-height:1.5}
+.trust-text.contact{color:var(--ivory-2);font-weight:500}
+.trust-text.contact .gold{color:var(--gold)}
+
+.form fieldset{border:none}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px}
+.form-field label{display:block;font-size:10px;letter-spacing:2px;font-weight:600;margin-bottom:8px;color:var(--ivory-2)}
+.form-field label .req{color:var(--gold)}
+.form-field input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--dark-divider-2);padding-bottom:10px;font-size:15px;color:var(--ivory);font-family:inherit;font-weight:500;transition:border-color 0.25s ease}
+.form-field input::placeholder{color:#5a5a5a;font-style:italic}
+.form-field input:focus{outline:none;border-bottom-color:var(--gold)}
+.form-field input:focus + .form-bar{transform:scaleX(1)}
+.chips-label{font-size:10px;color:var(--ivory-2);letter-spacing:2px;font-weight:600;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.chip{padding:8px 14px;font-size:11px;font-weight:600;letter-spacing:0.5px;border:1px solid var(--dark-divider-2);color:var(--ivory-2);cursor:pointer;transition:all 0.2s ease}
+.chip:hover{border-color:var(--gold);color:var(--gold)}
+.chip.active{background:var(--gold);color:var(--obsidian);border-color:var(--gold);font-weight:700}
+.form-textarea label{font-size:10px;color:var(--ivory-2);letter-spacing:2px;font-weight:600;display:block;margin-bottom:8px}
+.form-textarea textarea{width:100%;background:transparent;border:1px solid var(--dark-divider-2);padding:14px;min-height:90px;font-size:14px;color:var(--ivory);font-family:inherit;font-weight:400;line-height:1.55;resize:vertical;transition:border-color 0.25s ease}
+.form-textarea textarea::placeholder{color:#5a5a5a;font-style:italic}
+.form-textarea textarea:focus{outline:none;border-color:var(--gold)}
+.form-consent{display:flex;align-items:flex-start;gap:12px;margin:32px 0}
+.form-consent input{position:absolute;opacity:0;pointer-events:none}
+.form-consent .checkbox{width:16px;height:16px;border:1px solid var(--gold);background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;cursor:pointer;transition:all 0.2s ease}
+.form-consent .checkbox::after{content:"✓";color:var(--obsidian);font-size:11px;font-weight:900}
+.form-consent input:not(:checked) ~ .checkbox{background:transparent}
+.form-consent input:not(:checked) ~ .checkbox::after{content:""}
+.form-consent label{font-size:11px;color:var(--ivory-2);line-height:1.55;font-weight:400;cursor:pointer}
+.form-consent label .gold{color:var(--gold);text-decoration:underline}
+.form-submit-row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.form-submit-note{font-size:11px;color:var(--text-3);font-weight:500}
+.form-submit-note .req{color:var(--gold)}
+
+/* ============================================================
+   10 — Читать Сергея (соц-сети)
+   ============================================================ */
+.follow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--stone);border:1px solid var(--stone)}
+.follow-card{background:var(--cream);padding:32px 28px;display:flex;flex-direction:column;min-height:240px;cursor:pointer;transition:all 0.3s ease;position:relative;color:inherit}
+.follow-card:hover{background:var(--obsidian)}
+.follow-card:hover .follow-name{color:var(--ivory)}
+.follow-card:hover .follow-desc{color:var(--ivory-2)}
+.follow-card:hover .follow-handle{color:var(--gold)}
+.follow-card:hover .follow-foot{border-top-color:var(--dark-divider);color:var(--gold)}
+.follow-card:hover .follow-arrow{color:var(--gold);opacity:1}
+.follow-card:hover .follow-avatar{background:var(--gold);color:var(--obsidian)}
+.follow-card:hover::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold)}
+.follow-head-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.follow-avatar{width:48px;height:48px;background:var(--obsidian);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s ease}
+.follow-avatar svg{width:22px;height:22px;display:block}
+.follow-arrow{font-size:18px;color:var(--graphite);opacity:0.3;transition:all 0.25s ease}
+.follow-name{font-size:22px;font-weight:900;line-height:1.05;letter-spacing:-0.5px;color:var(--graphite);margin-bottom:6px;transition:color 0.25s ease}
+.follow-handle{font-size:11px;letter-spacing:0.8px;color:var(--gold);font-weight:600;margin-bottom:14px;transition:color 0.25s ease}
+.follow-desc{font-size:13px;color:var(--text-2);line-height:1.55;font-weight:400;margin-bottom:auto;transition:color 0.25s ease}
+.follow-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--stone-soft);font-size:10px;font-weight:600;letter-spacing:2px;color:var(--graphite);display:flex;justify-content:space-between;transition:all 0.25s ease}
+.follow-foot-arrow{color:var(--gold)}
+.follow-bottom{margin-top:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.follow-bottom-text{font-size:13px;color:var(--text-3);font-weight:500;line-height:1.5}
+
+/* ============================================================
+   11 — Footer
+   ============================================================ */
+footer{background:var(--footer-bg);padding:80px 56px 0;color:var(--ivory)}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;padding-bottom:64px}
+.footer-brand-row{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.logo-mark{width:48px;height:48px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--gold);letter-spacing:-1px;font-style:italic;flex-shrink:0}
+.brand-name{font-size:18px;font-weight:900;color:var(--ivory);letter-spacing:-0.4px;line-height:1.1}
+.brand-corp{font-size:10px;color:var(--text-4);letter-spacing:2px;font-weight:600;margin-top:3px}
+.footer-slogan{font-size:24px;font-weight:900;color:var(--ivory);letter-spacing:-0.6px;line-height:1.1;margin-bottom:18px}
+.footer-desc{font-size:13px;color:var(--ivory-2);line-height:1.6;font-weight:400;max-width:380px;margin-bottom:24px}
+.socials{display:flex;gap:10px}
+.social-icon{width:36px;height:36px;border:1px solid var(--dark-divider);display:flex;align-items:center;justify-content:center;color:var(--ivory-2);font-size:14px;font-weight:700;transition:all 0.25s ease}
+.social-icon:hover{border-color:var(--gold);color:var(--gold)}
+.footer-col-title{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--gold);margin-bottom:24px}
+.footer-links{display:flex;flex-direction:column;gap:14px;font-size:13px;color:var(--ivory-2);font-weight:500}
+.footer-links a:hover{color:var(--gold)}
+.footer-contact-item{display:flex;flex-direction:column;gap:4px}
+.footer-contact-label{font-size:9px;color:var(--text-3);letter-spacing:2px;font-weight:600}
+.footer-contact-value{color:var(--ivory);font-size:13px;font-weight:500}
+.footer-contact-list{display:flex;flex-direction:column;gap:18px}
+.footer-corp-info{margin-top:32px;border-top:1px solid var(--dark-divider);padding-top:20px}
+.footer-corp-info-label{font-size:9px;color:var(--text-3);letter-spacing:2px;font-weight:600;margin-bottom:6px}
+.footer-corp-info-label:not(:first-child){margin-top:10px}
+.footer-corp-info-value{font-size:12px;color:var(--ivory-2);font-weight:500}
+.footer-disclaimer{border-top:1px solid var(--dark-divider);padding:24px 0;display:flex;align-items:flex-start;gap:18px;font-size:11px;color:var(--text-3);line-height:1.55;font-weight:400;font-style:italic;flex-wrap:wrap}
+.footer-disclaimer-tag{font-style:normal;color:var(--gold);font-weight:700;letter-spacing:2px;flex-shrink:0}
+.footer-disclaimer-text{max-width:920px}
+.footer-bottom{border-top:1px solid var(--dark-divider);padding:24px 0 32px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text-3);font-weight:500;gap:24px;flex-wrap:wrap}
+.footer-bottom-right{display:flex;align-items:center;gap:18px}
+.btn-up{border:1px solid var(--dark-divider);padding:8px 14px;font-size:10px;letter-spacing:1.5px;color:var(--gold);font-weight:600;cursor:pointer;transition:all 0.25s ease}
+.btn-up:hover{border-color:var(--gold)}
+
+/* ============================================================
+   Theme switcher
+   ============================================================ */
+.theme-switcher{position:sticky;top:0;z-index:10000;display:flex;justify-content:flex-end;align-items:center;gap:2px;background:rgba(8,8,8,0.92);padding:8px 24px;border-bottom:1px solid rgba(201,169,97,0.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.theme-btn{padding:7px 14px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(245,241,230,0.7);cursor:pointer;background:transparent;border:none;font-family:inherit;text-transform:uppercase;transition:all 0.2s;white-space:nowrap}
+.theme-btn:hover{color:var(--gold)}
+.theme-btn.active{background:var(--gold);color:var(--obsidian);font-weight:800}
+
+/* ============================================================
+   COLOR 2 — Dark forest (тёмно-серо-зелёный)
+   ============================================================ */
+body[data-theme="color2"]{
+  --cream:#252B25;
+  --stone:#34403A;
+  --stone-soft:#3A4640;
+  --graphite:#E8EBE0;
+  --graphite-2:#D5D8C8;
+  --text-2:#98A095;
+  --text-3:#788076;
+  --text-4:#5B6058;
+  --obsidian:#10140F;
+  --footer-bg:#0A0E08;
+  --dark-card:#1A1F1A;
+  --dark-divider:#28302A;
+  --dark-divider-2:#34403A;
+  --ivory:#E8EBE0;
+  --ivory-2:#98A095;
+  --gold:#B8C5A8;
+  --gold-glow:rgba(184,197,168,0.55);
+  --gold-bg:rgba(184,197,168,0.08);
+  --warning-bg:#3A4030;
+}
+
+/* ============================================================
+   COLOR 3 — Deep violet (тёмно-сине-фиолетовый)
+   ============================================================ */
+body[data-theme="color3"]{
+  --cream:#1F1F40;
+  --stone:#2D2D55;
+  --stone-soft:#353560;
+  --graphite:#E8E8F5;
+  --graphite-2:#C8C8DC;
+  --text-2:#98989F;
+  --text-3:#787890;
+  --text-4:#5B5B70;
+  --obsidian:#14142B;
+  --footer-bg:#0A0A1A;
+  --dark-card:#1A1A35;
+  --dark-divider:#2A2A4A;
+  --dark-divider-2:#353560;
+  --ivory:#E8E8F5;
+  --ivory-2:#98989F;
+  --gold:#B19EFF;
+  --gold-glow:rgba(177,158,255,0.55);
+  --gold-bg:rgba(177,158,255,0.08);
+  --warning-bg:#3A2030;
+}
+
+/* ============================================================
+   Responsive (basic)
+   ============================================================ */
+@media (max-width: 1023px){
+  .hero-grid,.signature-grid,.speak-grid,.form-grid{grid-template-columns:1fr;gap:40px}
+  .hero-photo-wrap{height:400px;margin-bottom:0}
+  .services-grid,.cases-grid,.follow-grid{grid-template-columns:repeat(2,1fr)}
+  .audience-grid{grid-template-columns:repeat(2,1fr)}
+  .scale-row,.dots-row{grid-template-columns:repeat(7,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .principle{grid-template-columns:120px 1fr;gap:32px}
+  .principle-roman{font-size:96px}
+  .section-title,.hero-title,.hero-title-2{font-size:40px;letter-spacing:-1px}
+  .quote{font-size:48px;letter-spacing:-1.5px}
+  .principle-title{font-size:32px}
+  section{padding:64px 32px 56px}
+  #hero{padding:32px 32px 48px}
+  .strip{padding:14px 32px}
+}
+@media (max-width: 599px){
+  .services-grid,.cases-grid,.audience-grid,.follow-grid,.footer-grid{grid-template-columns:1fr}
+  .scale-row,.dots-row{grid-template-columns:repeat(4,1fr)}
+  .form-row{grid-template-columns:1fr;gap:20px;margin-bottom:24px}
+  .section-title,.hero-title,.hero-title-2{font-size:32px}
+  .quote{font-size:32px;letter-spacing:-1px;line-height:1.1}
+  .principle{grid-template-columns:1fr;gap:16px}
+  .principle-roman{font-size:72px}
+  .section-head,.lifecycle-head{flex-direction:column;align-items:flex-start;gap:20px}
+  .section-side,.lifecycle-counter{text-align:left;max-width:none}
+  .strip{font-size:9px;padding:12px 20px}
+  section{padding:56px 20px 48px}
+  #hero{padding:24px 20px 40px}
+  .hero-stats{flex-wrap:wrap;gap:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="theme-switcher">
+  <button class="theme-btn active" data-set-theme="color1">COLOR 1</button>
+  <button class="theme-btn" data-set-theme="color2">COLOR 2</button>
+  <button class="theme-btn" data-set-theme="color3">COLOR 3</button>
+</div>
+
+<!-- ===========================================================
+     01 · HERO
+     =========================================================== -->
+<section id="hero" class="dark">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-overline">PALMETTO TGM INTERNATIONAL · 2026</div>
+        <div class="hero-title">Сергей<br>Захаров —</div>
+        <div class="hero-title-2">предприниматель,<br>эксперт и&nbsp;спикер</div>
+        <div class="hero-sub">26 лет помогает инвесторам и застройщикам проходить полный цикл строительного проекта — от идеи и земли до ввода и работающего объекта.</div>
+        <div class="hero-cta-row">
+          <a href="#contact" class="btn btn-gold">ОБСУДИТЬ ПРОЕКТ →</a>
+          <a href="#speaking" class="btn btn-ghost-gold">ПРИГЛАСИТЬ ВЫСТУПИТЬ</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">26+</div>
+            <div class="hero-stat-label">ЛЕТ В ОТРАСЛИ</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">100+</div>
+            <div class="hero-stat-label">ОБЪЕКТОВ</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">III</div>
+            <div class="hero-stat-label">ФИНАЛИСТ «ЛИДЕРЫ»</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="5.png" alt="Сергей Захаров">
+        <div class="hero-photo-grad"></div>
+        <div class="hero-photo-caption">— ГЕНЕРАЛЬНЫЙ ДИРЕКТОР</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-light"><span>↓ КТО ТАКОЙ СЕРГЕЙ ЗАХАРОВ</span><span class="strip-num">02 / 11</span></div>
+
+<!-- ===========================================================
+     02 · О СЕРГЕЕ — ЦИТАТА
+     =========================================================== -->
+<section id="about" class="light">
+  <div class="container-narrow">
+    <div class="q-overlines">
+      <span>ГЛАВНАЯ ИДЕЯ</span>
+      <span>02 — О СЕРГЕЕ</span>
+    </div>
+    <div class="quote">
+      <span class="gold">«</span>Заказчику<br>
+      нужно <span class="muted-strike">не</span> здание<br>
+      Ему нужен <span class="gold">работающий</span> объект<span class="gold">»</span>
+    </div>
+    <div class="quote-divider"></div>
+    <div class="signature-grid">
+      <div>
+        <div class="signature-photo">
+          <img src="1.png" alt="Сергей Захаров — портрет">
+        </div>
+        <div class="signature-name">Сергей Захаров</div>
+        <div class="signature-role">Генеральный директор<br>ООО «Палметто ТГМ Интернешнл»</div>
+        <div class="regalia">
+          <div class="regalia-item">26 ЛЕТ В СТРОИТЕЛЬСТВЕ</div>
+          <div class="regalia-item">ВИЦЕ-ПРЕЗИДЕНТ АССОЦИАЦИИ<br>«ТВЕРСКОЕ ОБЪЕДИНЕНИЕ СТРОИТЕЛЕЙ»</div>
+          <div class="regalia-item">ФИНАЛИСТ III КОНКУРСА<br>«ЛИДЕРЫ СТРОИТЕЛЬНОЙ ОТРАСЛИ»</div>
+        </div>
+      </div>
+      <div class="bio">
+        <p>26 лет работаю в строительной отрасли — от первых объектов и промышленных предприятий до управления сложными строительными проектами полного цикла.</p>
+        <p>Школа без учеников — не школа. Больница без пациентов — не больница. Производство без запуска — не бизнес-результат. Поэтому я не считаю стройку завершённой в момент сдачи. Объект работает или не работает — вот единственный критерий.</p>
+        <p>Мне приходится говорить на разных языках: с инвестором — про деньги и риски, с проектировщиком — про логику решений, с экспертизой — про документы, с подрядчиком — про сроки и качество, с эксплуатацией — про реальную жизнь объекта. Эти языки не противоречат друг другу — но без переводчика проект распадается на этапы, между которыми возникают ошибки.</p>
+        <p class="citation">— Из интервью для семинара «Жизненный цикл строительного проекта», 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-dark"><span>↓ ПОЛНЫЙ ЦИКЛ СТРОИТЕЛЬНОГО ПРОЕКТА</span><span class="strip-num">03 / 11</span></div>
+
+<!-- ===========================================================
+     03 · ПОЛНЫЙ ЦИКЛ
+     =========================================================== -->
+<section id="lifecycle" class="dark" style="padding:80px 56px 88px">
+  <div class="container">
+    <div class="lifecycle-head">
+      <div>
+        <div class="overline">03 — МЕТОД</div>
+        <div class="section-title" style="color:var(--ivory)">От идеи —<br>до <span class="gold">работающего</span> объекта</div>
+      </div>
+      <div class="lifecycle-counter">
+        <div><b>13 ЭТАПОВ</b></div>
+        <div><span class="gold-b">3 УЗКИХ МЕСТА</span></div>
+        <div><b>1 РЕЗУЛЬТАТ</b></div>
+      </div>
+    </div>
+
+    <div class="scale-wrap">
+      <div class="scale-row scale-row-top">
+        <div class="stage-label"><div class="stage-num muted">01</div><div class="stage-text regular">ИДЕЯ</div><div class="stage-tick"></div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-num warn">03 ⚠</div><div class="stage-text warn">АУДИТ<br>УЧАСТКА</div><div class="stage-tick warn"></div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-num muted">05</div><div class="stage-text regular">ТЗ</div><div class="stage-tick"></div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-num warn">07 ⚠</div><div class="stage-text warn">ЭКСПЕРТИЗА</div><div class="stage-tick warn"></div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-num muted">09</div><div class="stage-text regular">СМР</div><div class="stage-tick"></div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-num warn">11 ⚠</div><div class="stage-text warn">ВВОД</div><div class="stage-tick warn"></div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-num star">13 ★</div><div class="stage-text star">Работающий<br>объект</div><div class="stage-tick warn"></div></div>
+      </div>
+
+      <div class="scale-line-row">
+        <div class="scale-line"></div>
+        <div class="dots-row">
+          <div class="dot-cell"><div class="dot start"></div></div>
+          <div class="dot-cell"><div class="dot"></div></div>
+          <div class="dot-cell"><div class="dot warn"></div></div>
+          <div class="dot-cell"><div class="dot"></div></div>
+          <div class="dot-cell"><div class="dot"></div></div>
+          <div class="dot-cell"><div class="dot"></div></div>
+          <div class="dot-cell"><div class="dot warn"></div></div>
+          <div class="dot-cell"><div class="dot"></div></div>
+          <div class="dot-cell"><div class="dot"></div></div>
+          <div class="dot-cell"><div class="dot"></div></div>
+          <div class="dot-cell"><div class="dot warn"></div></div>
+          <div class="dot-cell"><div class="dot"></div></div>
+          <div class="dot-cell"><div class="dot final"></div></div>
+        </div>
+      </div>
+
+      <div class="scale-row scale-row-bottom">
+        <div></div>
+        <div class="stage-label"><div class="stage-tick bottom"></div><div class="stage-num muted">02</div><div class="stage-text regular">УЧАСТОК</div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-tick bottom"></div><div class="stage-num muted">04</div><div class="stage-text regular">ИРД</div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-tick bottom"></div><div class="stage-num muted">06</div><div class="stage-text regular">ПРОЕКТИРОВАНИЕ</div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-tick bottom"></div><div class="stage-num muted">08</div><div class="stage-text regular">РАЗРЕШЕНИЕ<br>НА СТРОИТЕЛЬСТВО</div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-tick bottom"></div><div class="stage-num muted">10</div><div class="stage-text regular">ПУСКОНАЛАДКА</div></div>
+        <div></div>
+        <div class="stage-label"><div class="stage-tick bottom"></div><div class="stage-num muted">12</div><div class="stage-text regular">ЭКСПЛУАТАЦИЯ</div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <div class="warning-cards">
+      <div>
+        <div class="warning-cards-item-title">⚠ АУДИТ УЧАСТКА</div>
+        <div class="warning-cards-item-text">Земля без проверки ограничений, ГПЗУ и прав — главный источник срыва проекта на старте.</div>
+      </div>
+      <div>
+        <div class="warning-cards-item-title">⚠ ЭКСПЕРТИЗА</div>
+        <div class="warning-cards-item-text">Положительное заключение — это формальность. Оно не гарантирует, что проект безопасен от ошибок.</div>
+      </div>
+      <div>
+        <div class="warning-cards-item-title">⚠ ВВОД В ЭКСПЛУАТАЦИЮ</div>
+        <div class="warning-cards-item-text">Стройку отделяют от эксплуатации — и эксплуатирующая организация не может нормально принять или запустить объект.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-light"><span>↓ С КАКИМИ ЗАДАЧАМИ ПОМОГАЮ</span><span class="strip-num">04 / 11</span></div>
+
+<!-- ===========================================================
+     04 · УСЛУГИ
+     =========================================================== -->
+<section id="services" class="light">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="overline">04 — УСЛУГИ</div>
+        <div class="section-title">С какими задачами<br>помогаю</div>
+      </div>
+      <div class="section-side">Шесть форматов работы — на любом этапе строительного проекта, от первого взгляда на участок до запуска объекта.</div>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-head-row"><div class="service-num">01</div><div class="service-arrow">→</div></div>
+        <div class="service-title">Аудит<br>земельного<br>участка</div>
+        <div class="service-desc">Проверка ограничений, рисков, прав, ГПЗУ и факторов, которые могут помешать строительству.</div>
+        <div class="service-foot"><span>ПОДРОБНЕЕ</span><span class="service-foot-arrow">→</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-head-row"><div class="service-num">02</div><div class="service-arrow">→</div></div>
+        <div class="service-title">Подготовка<br>к проектированию</div>
+        <div class="service-desc">Сбор исходных данных, формирование ТЗ, постановка задачи проектировщикам.</div>
+        <div class="service-foot"><span>ПОДРОБНЕЕ</span><span class="service-foot-arrow">→</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-head-row"><div class="service-num">03</div><div class="service-arrow">→</div></div>
+        <div class="service-title">Управление<br>проектированием</div>
+        <div class="service-desc">Контроль проектной и рабочей документации, проверка логики решений, работа с BIM и конфликтами.</div>
+        <div class="service-foot"><span>ПОДРОБНЕЕ</span><span class="service-foot-arrow">→</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-head-row"><div class="service-num">04</div><div class="service-arrow">→</div></div>
+        <div class="service-title">Экспертиза<br>и разрешение<br>на строительство</div>
+        <div class="service-desc">Подготовка, сопровождение, коммуникация с экспертами, снижение риска замечаний.</div>
+        <div class="service-foot"><span>ПОДРОБНЕЕ</span><span class="service-foot-arrow">→</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-head-row"><div class="service-num">05</div><div class="service-arrow">→</div></div>
+        <div class="service-title">Строительство<br>и контроль</div>
+        <div class="service-desc">Работа с генподрядчиком, субподрядчиками, строительным контролем, авторским надзором.</div>
+        <div class="service-foot"><span>ПОДРОБНЕЕ</span><span class="service-foot-arrow">→</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-head-row"><div class="service-num">06</div><div class="service-arrow">→</div></div>
+        <div class="service-title">Ввод<br>и эксплуатация</div>
+        <div class="service-desc">Документы, исполнительная документация, взаимодействие с эксплуатацией, доведение объекта до запуска.</div>
+        <div class="service-foot"><span>ПОДРОБНЕЕ</span><span class="service-foot-arrow">→</span></div>
+      </div>
+    </div>
+
+    <div class="services-bottom">
+      <div class="services-bottom-text">Не нашли свою задачу? Напишите — обсудим формат.</div>
+      <a href="#contact" class="btn btn-dark-gold">ОБСУДИТЬ ПРОЕКТ →</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-dark"><span>↓ КЕЙСЫ И ОПЫТ</span><span class="strip-num">05 / 11</span></div>
+
+<!-- ===========================================================
+     05 · КЕЙСЫ
+     =========================================================== -->
+<section id="cases" class="dark">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="overline">05 — ОПЫТ</div>
+        <div class="section-title" style="color:var(--ivory)">Реальные<br><span class="gold">результаты</span></div>
+      </div>
+      <div class="section-side">Промышленные, коммерческие и логистические объекты от 2 000 до 60 000 м². Названия клиентов раскрываются по запросу.</div>
+    </div>
+
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-head"><div class="case-label">CASE 01</div><div class="case-meta">2023<br>ТВЕРСКАЯ ОБЛ.</div></div>
+        <div class="case-industry">ПРОИЗВОДСТВО</div>
+        <div class="case-name">Завод по розливу<br>напитков</div>
+        <div class="case-body">
+          <div class="case-divider"></div>
+          <div class="case-metric">−3 мес.</div>
+          <div class="case-metric-label">К ПЛАНОВОМУ СРОКУ ВВОДА</div>
+          <div class="case-desc">Сопровождение проекта от ТЗ до запуска. Экспертиза пройдена с первого захода, замечания по СМР закрыты до приёмки.</div>
+          <div class="case-tags"><span class="case-tag">ТЗ</span><span class="case-tag">ЭКСПЕРТИЗА</span><span class="case-tag">СМР</span><span class="case-tag">ВВОД</span></div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-head"><div class="case-label">CASE 02</div><div class="case-meta">2022<br>ПОДМОСКОВЬЕ</div></div>
+        <div class="case-industry">ЛОГИСТИКА</div>
+        <div class="case-name">Складской комплекс<br>федерального<br>оператора</div>
+        <div class="case-body">
+          <div class="case-divider"></div>
+          <div class="case-metric">62 000 м²</div>
+          <div class="case-metric-label">ВВЕДЕНО В СРОК</div>
+          <div class="case-desc">Управление проектированием и СМР. Координация между генподрядчиком и эксплуатационной службой со старта проектирования.</div>
+          <div class="case-tags"><span class="case-tag">BIM</span><span class="case-tag">ПРОЕКТ</span><span class="case-tag">СМР</span><span class="case-tag">ЭКСПЛУАТАЦИЯ</span></div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-head"><div class="case-label">CASE 03</div><div class="case-meta">2024<br>МОСКВА</div></div>
+        <div class="case-industry">ПИЩЕВАЯ ИНДУСТРИЯ</div>
+        <div class="case-name">Производственная<br>кухня федеральной<br>сети</div>
+        <div class="case-body">
+          <div class="case-divider"></div>
+          <div class="case-metric">0 крит.</div>
+          <div class="case-metric-label">ЗАМЕЧАНИЙ ПРИ ВВОДЕ</div>
+          <div class="case-desc">Функция технического заказчика на стадии экспертизы и ввода. Документооборот выстроен с нуля под требования регулятора.</div>
+          <div class="case-tags"><span class="case-tag">ТЕХ.ЗАКАЗ.</span><span class="case-tag">ДОКИ</span><span class="case-tag">ВВОД</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cases-bottom">
+      <div class="cases-bottom-text">Названия и подробности кейсов раскрываются индивидуально под NDA. Запросите расширенный файл портфолио — пришлём по email.</div>
+      <div class="cases-cta-row">
+        <a href="#cases" class="btn btn-ghost-gold">ВСЕ КЕЙСЫ →</a>
+        <a href="#contact" class="btn btn-gold">ЗАПРОСИТЬ ПОРТФОЛИО</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-light"><span>↓ ВЫСТУПЛЕНИЯ И СЕМИНАРЫ</span><span class="strip-num">06 / 11</span></div>
+
+<!-- ===========================================================
+     06 · ВЫСТУПЛЕНИЯ
+     =========================================================== -->
+<section id="speaking" class="light">
+  <div class="container">
+    <div class="speak-head">
+      <div class="overline">06 — СПИКЕР</div>
+      <div class="section-title" style="max-width:980px">Практические семинары<br>о строительных проектах<br><span class="gold">без иллюзий</span></div>
+    </div>
+
+    <div class="speak-grid">
+      <div>
+        <div class="speak-photo">
+          <img src="7.png" alt="Сергей Захаров">
+        </div>
+        <div class="speak-caption">— ИЗ СЕМИНАРА «ЖИЗНЕННЫЙ ЦИКЛ СТРОИТЕЛЬНОГО ПРОЕКТА», 2024</div>
+        <div class="speak-stats">
+          <div>
+            <div class="speak-stat-num">8</div>
+            <div class="speak-stat-label">АВТОРСКИХ<br>ТЕМ</div>
+          </div>
+          <div>
+            <div class="speak-stat-num">2-8 ч</div>
+            <div class="speak-stat-label">ФОРМАТ<br>ВЫСТУПЛЕНИЯ</div>
+          </div>
+          <div>
+            <div class="speak-stat-num">B2B</div>
+            <div class="speak-stat-label">ИНВЕСТОРЫ,<br>УПРАВЛЕНЦЫ</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="speak-intro">Не лекции с мотивирующими цитатами, а разбор реальных строительных проектов. Что ломается в проектировании, как пройти экспертизу без потерь, почему ТЗ решает судьбу объекта.</div>
+
+        <div class="topics-list">
+          <div class="topic"><div class="topic-num">01</div><div class="topic-text">Жизненный цикл строительного проекта</div><div class="topic-arrow">→</div></div>
+          <div class="topic"><div class="topic-num">02</div><div class="topic-text">Управление рисками в строительстве</div><div class="topic-arrow">→</div></div>
+          <div class="topic"><div class="topic-num">03</div><div class="topic-text">Как инвестору подготовиться к строительству</div><div class="topic-arrow">→</div></div>
+          <div class="topic"><div class="topic-num">04</div><div class="topic-text">Проектная документация: где возникают ошибки</div><div class="topic-arrow">→</div></div>
+          <div class="topic"><div class="topic-num">05</div><div class="topic-text">Экспертиза: как пройти и не потерять проект</div><div class="topic-arrow">→</div></div>
+          <div class="topic"><div class="topic-num">06</div><div class="topic-text">Почему ТЗ решает судьбу объекта</div><div class="topic-arrow">→</div></div>
+          <div class="topic"><div class="topic-num">07</div><div class="topic-text">BIM и проверка проектных конфликтов</div><div class="topic-arrow">→</div></div>
+          <div class="topic"><div class="topic-num">08</div><div class="topic-text">Как довести объект до ввода и эксплуатации</div><div class="topic-arrow">→</div></div>
+        </div>
+
+        <div class="speak-bottom">
+          <div class="speak-bottom-text">Готовлю темы под аудиторию: инвесторы, девелоперы,<br>руководители проектов, образовательные площадки.</div>
+          <a href="#contact" class="btn btn-dark-gold">ПРИГЛАСИТЬ ВЫСТУПИТЬ →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-dark"><span>↓ ПОДХОД</span><span class="strip-num">07 / 11</span></div>
+
+<!-- ===========================================================
+     07 · ПОДХОД
+     =========================================================== -->
+<section id="approach" class="dark">
+  <div class="container-narrow">
+    <div class="section-head">
+      <div>
+        <div class="overline">07 — ПОДХОД</div>
+        <div class="section-title" style="color:var(--ivory)">Три принципа,<br>от которых я <span class="gold">не отступаю</span></div>
+      </div>
+      <div class="section-side">Не методология из учебника. Сформулировано на собственных проектах за 26 лет.</div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-roman">I</div>
+      <div>
+        <div class="principle-overline">ПРИНЦИП ПЕРВЫЙ</div>
+        <div class="principle-title">Результативность</div>
+        <div class="principle-text">Проект должен достигать результата, ради которого его начинали. Не «здание сдано», а «объект работает». Это критерий, по которому я оцениваю каждое решение на каждом этапе — от ТЗ до пусконаладки.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-roman">II</div>
+      <div>
+        <div class="principle-overline">ПРИНЦИП ВТОРОЙ</div>
+        <div class="principle-title">Эффективность</div>
+        <div class="principle-text">Ресурсы, сроки, бюджет и команда должны оставаться управляемыми. Если проект перестал быть управляемым — значит, я где-то перестал делать свою работу. Это видно в цифрах раньше, чем в авариях.</div>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="principle-roman">III</div>
+      <div>
+        <div class="principle-overline">ПРИНЦИП ТРЕТИЙ</div>
+        <div class="principle-title">Качество</div>
+        <div class="principle-text">Качество — не только в стройке. В документации, проектировании, контроле и эксплуатации тоже. Объект, в котором проектная папка лежит криво, ломается через два года эксплуатации — даже если стены ровные.</div>
+      </div>
+    </div>
+
+    <div class="approach-bottom">
+      <div class="approach-quote">«Эти три принципа Сергей называет основополагающими в своей практике.» — из ТЗ</div>
+      <div class="cases-cta-row">
+        <a href="#approach" class="btn btn-ghost-gold">УЗНАТЬ МЕТОД</a>
+        <a href="#contact" class="btn btn-gold">ОБСУДИТЬ ПРОЕКТ →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-light"><span>↓ ДЛЯ КОГО</span><span class="strip-num">08 / 11</span></div>
+
+<!-- ===========================================================
+     08 · ДЛЯ КОГО
+     =========================================================== -->
+<section id="audience" class="light">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="overline">08 — АУДИТОРИЯ</div>
+        <div class="section-title">Кому я могу<br>быть <span class="gold">полезен</span></div>
+      </div>
+      <div class="section-side">У каждой группы — своя боль. Если узнаёте себя в одной из карточек — мы говорим на одном языке.</div>
+    </div>
+
+    <div class="audience-group-label">— B2B КЛИЕНТЫ СТРОИТЕЛЬСТВА</div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-head-row"><div class="audience-num">01</div><div class="audience-arrow">→</div></div>
+        <div class="audience-name">Инвесторам</div>
+        <div class="audience-pain">«Не потерять деньги до старта проекта.»</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-head-row"><div class="audience-num">02</div><div class="audience-arrow">→</div></div>
+        <div class="audience-name">Собственникам<br>производств</div>
+        <div class="audience-pain">«Запустить производство, а не сдать здание.»</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-head-row"><div class="audience-num">03</div><div class="audience-arrow">→</div></div>
+        <div class="audience-name">Застройщикам</div>
+        <div class="audience-pain">«Пройти экспертизу с первого захода.»</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-head-row"><div class="audience-num">04</div><div class="audience-arrow">→</div></div>
+        <div class="audience-name">Девелоперам</div>
+        <div class="audience-pain">«Уложиться в бюджет и сроки без переделок.»</div>
+      </div>
+    </div>
+
+    <div class="audience-group-label">— ПАРТНЁРЫ, ПЛОЩАДКИ И КОМАНДЫ</div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-head-row"><div class="audience-num">05</div><div class="audience-arrow">→</div></div>
+        <div class="audience-name">Региональным<br>институтам<br>развития</div>
+        <div class="audience-pain">«Дать инвестору работающую площадку.»</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-head-row"><div class="audience-num">06</div><div class="audience-arrow">→</div></div>
+        <div class="audience-name">Руководителям<br>стройпроектов</div>
+        <div class="audience-pain">«Не утонуть в документообороте на стыках этапов.»</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-head-row"><div class="audience-num">07</div><div class="audience-arrow">→</div></div>
+        <div class="audience-name">Организаторам<br>деловых<br>мероприятий</div>
+        <div class="audience-pain">«Спикер, который не пересказывает учебник.»</div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-head-row"><div class="audience-num">08</div><div class="audience-arrow">→</div></div>
+        <div class="audience-name">Образовательным<br>площадкам</div>
+        <div class="audience-pain">«Реальные кейсы, а не теория из учебника.»</div>
+      </div>
+    </div>
+
+    <div class="audience-bottom">
+      <div class="audience-bottom-text">Не нашли свою группу? Напишите — обсудим, что общего у вашего проекта со строительным циклом.</div>
+      <a href="#contact" class="btn btn-dark-gold">НАПИСАТЬ СЕРГЕЮ →</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-dark"><span>↓ ОБСУДИТЬ ВАШ ПРОЕКТ</span><span class="strip-num">09 / 11</span></div>
+
+<!-- ===========================================================
+     09 · ФОРМА
+     =========================================================== -->
+<section id="contact" class="dark">
+  <div class="container">
+    <div class="form-grid">
+
+      <div class="form-left">
+        <div class="overline">09 — ЗАЯВКА</div>
+        <div class="section-title" style="color:var(--ivory)">Обсудим<br>ваш строительный<br><span class="gold">проект</span></div>
+        <div class="form-sub">Опишите задачу: участок, проектирование, экспертиза, строительство, ввод или выступление. Свяжусь и предложу следующий шаг.</div>
+
+        <div class="trust">
+          <div class="trust-list">
+            <div class="trust-item">
+              <div class="trust-icon">⏱</div>
+              <div>
+                <div class="trust-title">Отвечу за 24 часа</div>
+                <div class="trust-text">В рабочие дни. Если срочно — позвоните напрямую.</div>
+              </div>
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon">✓</div>
+              <div>
+                <div class="trust-title">Конфиденциальность</div>
+                <div class="trust-text">При необходимости — обсуждение под NDA. Расширенное портфолио — по запросу.</div>
+              </div>
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon">→</div>
+              <div>
+                <div class="trust-title">Альтернативные каналы</div>
+                <div class="trust-text contact">
+                  <span class="gold">sergey@palmettotgm.ru</span><br>
+                  <span class="gold">@sergeyzakharov</span> · Telegram
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="form" novalidate>
+        <div class="form-row">
+          <div class="form-field">
+            <label>ИМЯ <span class="req">*</span></label>
+            <input type="text" name="name" placeholder="Сергей Иванов" required>
+          </div>
+          <div class="form-field">
+            <label>КОМПАНИЯ</label>
+            <input type="text" name="company" placeholder="ООО «Стройинвест»">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>ТЕЛЕФОН <span class="req">*</span></label>
+            <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+          </div>
+          <div class="form-field">
+            <label>EMAIL <span class="req">*</span></label>
+            <input type="email" name="email" placeholder="name@company.ru" required>
+          </div>
+        </div>
+
+        <div>
+          <div class="chips-label">ЧТО НУЖНО ОБСУДИТЬ <span class="req" style="color:var(--gold)">*</span></div>
+          <div class="chips">
+            <button type="button" class="chip active" data-chip="consult">КОНСУЛЬТАЦИЯ</button>
+            <button type="button" class="chip" data-chip="audit">АУДИТ ПРОЕКТА</button>
+            <button type="button" class="chip" data-chip="support">СОПРОВОЖДЕНИЕ</button>
+            <button type="button" class="chip" data-chip="tech-zak">ТЕХ. ЗАКАЗЧИК</button>
+            <button type="button" class="chip" data-chip="speaking">ВЫСТУПЛЕНИЕ</button>
+            <button type="button" class="chip" data-chip="other">ДРУГОЕ</button>
+          </div>
+        </div>
+
+        <div class="form-textarea">
+          <label>КРАТКОЕ ОПИСАНИЕ ЗАДАЧИ</label>
+          <textarea name="message" rows="4" placeholder="Расскажите про объект, стадию проекта, и какой вопрос сейчас самый острый…"></textarea>
+        </div>
+
+        <label class="form-consent">
+          <input type="checkbox" name="consent" checked required>
+          <span class="checkbox"></span>
+          <span>Согласен на обработку персональных данных и принимаю <span class="gold">политику конфиденциальности</span>.</span>
+        </label>
+
+        <div class="form-submit-row">
+          <div class="form-submit-note">Поля со <span class="req">*</span> обязательны</div>
+          <button type="submit" class="btn btn-gold btn-large">ОТПРАВИТЬ ЗАЯВКУ →</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-light"><span>↓ ЧИТАТЬ СЕРГЕЯ</span><span class="strip-num">10 / 11</span></div>
+
+<!-- ===========================================================
+     10 · ЧИТАТЬ СЕРГЕЯ — соцсети и платформы
+     =========================================================== -->
+<section id="follow" class="light">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="overline">10 — ЗНАКОМСТВО</div>
+        <div class="section-title">Читать <span class="gold">Сергея Захарова</span></div>
+      </div>
+      <div class="section-side">Канал, статьи, разборы, интервью. Полный цикл — не только в проектах, но и в текстах. Подпишитесь, если хотите узнать его как практика и автора.</div>
+    </div>
+
+    <div class="follow-grid">
+      <a href="https://t.me/sergeyzakharov" target="_blank" rel="noopener" class="follow-card">
+        <div class="follow-head-row">
+          <div class="follow-avatar"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.27 1.43.18 1.15 1.3l-2.72 12.81c-.19.92-.74 1.14-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></div>
+          <div class="follow-arrow">→</div>
+        </div>
+        <div class="follow-name">Telegram</div>
+        <div class="follow-handle">@sergeyzakharov</div>
+        <div class="follow-desc">Канал. Разбор кейсов, заметки с площадок, мысли вслух о проектах.</div>
+        <div class="follow-foot"><span>ПОДПИСАТЬСЯ</span><span class="follow-foot-arrow">→</span></div>
+      </a>
+
+      <a href="https://max.ru/sergey.zakharov" target="_blank" rel="noopener" class="follow-card">
+        <div class="follow-head-row">
+          <div class="follow-avatar"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2 21V3l3.5.7L12 13.5l6.5-9.8L22 3v18h-3v-12l-6 9.5h-2l-6-9.5v12H2z"/></svg></div>
+          <div class="follow-arrow">→</div>
+        </div>
+        <div class="follow-name">MAX</div>
+        <div class="follow-handle">sergey.zakharov</div>
+        <div class="follow-desc">Российский мессенджер. Прямые консультации и быстрые ответы.</div>
+        <div class="follow-foot"><span>НАПИСАТЬ</span><span class="follow-foot-arrow">→</span></div>
+      </a>
+
+      <a href="https://dzen.ru/sergeyzakharov" target="_blank" rel="noopener" class="follow-card">
+        <div class="follow-head-row">
+          <div class="follow-avatar"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-3.5 5.5h7v1.5L9.7 14.5H15v2H8v-1.5l5.5-5.5H8.5v-2z"/></svg></div>
+          <div class="follow-arrow">→</div>
+        </div>
+        <div class="follow-name">Дзен</div>
+        <div class="follow-handle">dzen.ru/sergeyzakharov</div>
+        <div class="follow-desc">Длинные статьи и колонки о строительных проектах и инвестициях.</div>
+        <div class="follow-foot"><span>ЧИТАТЬ</span><span class="follow-foot-arrow">→</span></div>
+      </a>
+
+      <a href="https://vc.ru/u/sergeyzakharov" target="_blank" rel="noopener" class="follow-card">
+        <div class="follow-head-row">
+          <div class="follow-avatar"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="60%" text-anchor="middle" dominant-baseline="middle" font-family="Montserrat,sans-serif" font-weight="900" font-size="13" letter-spacing="-0.8" fill="currentColor">VC</text></svg></div>
+          <div class="follow-arrow">→</div>
+        </div>
+        <div class="follow-name">vc.ru</div>
+        <div class="follow-handle">vc.ru/u/sergeyzakharov</div>
+        <div class="follow-desc">Колонка о деловой стороне строительства и рисках на стыках этапов.</div>
+        <div class="follow-foot"><span>ЧИТАТЬ</span><span class="follow-foot-arrow">→</span></div>
+      </a>
+
+      <a href="https://www.linkedin.com/in/sergey-zakharov" target="_blank" rel="noopener" class="follow-card">
+        <div class="follow-head-row">
+          <div class="follow-avatar"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM7.06 19.5H4V9h3.06v10.5zm-1.5-12c-.95 0-1.7-.75-1.7-1.7s.75-1.7 1.7-1.7 1.7.75 1.7 1.7-.75 1.7-1.7 1.7zM20 19.5h-3v-5.5c0-.7-.5-1.5-1.5-1.5s-1.5.8-1.5 1.5v5.5h-3V9h3v1.5c.4-.8 1.4-1.5 2.5-1.5C19 9 20 10.5 20 12.5v7z"/></svg></div>
+          <div class="follow-arrow">→</div>
+        </div>
+        <div class="follow-name">LinkedIn</div>
+        <div class="follow-handle">/in/sergey-zakharov</div>
+        <div class="follow-desc">Профиль для международной аудитории и обновления отрасли.</div>
+        <div class="follow-foot"><span>СВЯЗАТЬСЯ</span><span class="follow-foot-arrow">→</span></div>
+      </a>
+
+      <a href="https://rutube.ru/channel/sergeyzakharov" target="_blank" rel="noopener" class="follow-card">
+        <div class="follow-head-row">
+          <div class="follow-avatar"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5 3h14a3 3 0 013 3v12a3 3 0 01-3 3H5a3 3 0 01-3-3V6a3 3 0 013-3zm5 5l7 4-7 4V8z"/></svg></div>
+          <div class="follow-arrow">→</div>
+        </div>
+        <div class="follow-name">RuTube</div>
+        <div class="follow-handle">rutube.ru/sergeyzakharov</div>
+        <div class="follow-desc">Видео с семинаров, интервью и разборы реальных кейсов.</div>
+        <div class="follow-foot"><span>СМОТРЕТЬ</span><span class="follow-foot-arrow">→</span></div>
+      </a>
+    </div>
+
+    <div class="follow-bottom">
+      <div class="follow-bottom-text">Хотите подсказать ещё одну площадку или предложить интервью? Напишите.</div>
+      <a href="#contact" class="btn btn-dark-gold">НАПИСАТЬ СЕРГЕЮ →</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip strip-dark"><span>↓ ФУТЕР</span><span class="strip-num">11 / 11</span></div>
+
+<!-- ===========================================================
+     10 · ФУТЕР
+     =========================================================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <div class="footer-brand-row">
+          <div class="logo-mark">СЗ</div>
+          <div>
+            <div class="brand-name">Сергей Захаров</div>
+            <div class="brand-corp">PALMETTO TGM INTERNATIONAL</div>
+          </div>
+        </div>
+        <div class="footer-slogan">От идеи —<br>до <span class="gold">работающего</span> объекта</div>
+        <div class="footer-desc">26 лет помогаю инвесторам и застройщикам проходить полный цикл строительного проекта.</div>
+        <div class="socials">
+          <a href="#" class="social-icon">in</a>
+          <a href="#" class="social-icon">tg</a>
+          <a href="#" class="social-icon">@</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">РАЗДЕЛЫ</div>
+        <div class="footer-links">
+          <a href="#about">О Сергее</a>
+          <a href="#services">Услуги</a>
+          <a href="#lifecycle">Полный цикл</a>
+          <a href="#cases">Кейсы</a>
+          <a href="#speaking">Выступления</a>
+          <a href="#approach">Подход</a>
+          <a href="#audience">Для кого</a>
+          <a href="#follow">Читать Сергея</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">КОНТАКТЫ</div>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item"><div class="footer-contact-label">EMAIL</div><div class="footer-contact-value">sergey@palmettotgm.ru</div></div>
+          <div class="footer-contact-item"><div class="footer-contact-label">TELEGRAM</div><div class="footer-contact-value">@sergeyzakharov</div></div>
+          <div class="footer-contact-item"><div class="footer-contact-label">ТЕЛЕФОН</div><div class="footer-contact-value">+7 (___) ___-__-__</div></div>
+          <div class="footer-contact-item"><div class="footer-contact-label">ОФИС</div><div class="footer-contact-value">г. Тверь, Россия</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">ПРАВОВАЯ ИНФОРМАЦИЯ</div>
+        <div class="footer-links">
+          <a href="#">Политика конфиденциальности</a>
+          <a href="#">Согласие на обработку данных</a>
+          <a href="#">Реквизиты компании</a>
+          <a href="#">Условия использования</a>
+          <a href="#">Cookies</a>
+        </div>
+        <div class="footer-corp-info">
+          <div class="footer-corp-info-label">ИНН</div>
+          <div class="footer-corp-info-value">_________________</div>
+          <div class="footer-corp-info-label">ОГРН</div>
+          <div class="footer-corp-info-value">_________________</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-disclaimer">
+      <div class="footer-disclaimer-tag">⚠ ДИСКЛЕЙМЕР</div>
+      <div class="footer-disclaimer-text">Информация на сайте носит информационный характер и не является юридическим, проектным или инженерным заключением. Конкретные выводы по объекту возможны только после анализа документов, участка, проекта и исходных данных.</div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 Сергей Захаров · Palmet TGM International. Все права защищены.</div>
+      <div class="footer-bottom-right">
+        <span>Сайт сделан в&nbsp;<span style="color:var(--ivory-2)">2026</span></span>
+        <button class="btn-up" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ НАВЕРХ</button>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+// Переключатель цветовой темы
+document.querySelectorAll('[data-set-theme]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.body.dataset.theme = btn.dataset.setTheme;
+    document.querySelectorAll('[data-set-theme]').forEach(b => b.classList.toggle('active', b === btn));
+  });
+});
+
+// Чипы выбора типа запроса
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+
+// Форма (заглушка — не отправляет данные, только показывает alert)
+document.querySelector('.form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const activeChip = document.querySelector('.chip.active');
+  const data = Object.fromEntries(fd);
+  data.request_type = activeChip ? activeChip.dataset.chip : null;
+  console.log('Заявка (заглушка):', data);
+  alert('Спасибо. Заявка отправлена. Мы свяжемся с вами для уточнения задачи.\n\n(MVP-заглушка — данные выведены в console.log)');
+  e.target.reset();
+});
+</script>
+
+</body>
+</html>

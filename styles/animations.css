@@ -1,0 +1,102 @@
+/* ══════════════════════════════════
+   Reveal — Intersection Observer
+══════════════════════════════════ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.75s cubic-bezier(0.4,0,0.2,1),
+              transform 0.75s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1),
+              transform 0.65s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Per-child stagger for .wwd-cards, .solutions-grid, .cases-grid */
+.wwd-cards    .reveal:nth-child(1),
+.solutions-grid .reveal:nth-child(1),
+.cases-grid   .reveal:nth-child(1) { transition-delay: 0ms;   }
+.wwd-cards    .reveal:nth-child(2),
+.solutions-grid .reveal:nth-child(2),
+.cases-grid   .reveal:nth-child(2) { transition-delay: 100ms; }
+.wwd-cards    .reveal:nth-child(3),
+.solutions-grid .reveal:nth-child(3),
+.cases-grid   .reveal:nth-child(3) { transition-delay: 200ms; }
+
+/* reveal-line stagger */
+.reveal-line:nth-child(1) { transition-delay: 0ms;   }
+.reveal-line:nth-child(2) { transition-delay: 130ms; }
+.reveal-line:nth-child(3) { transition-delay: 260ms; }
+.reveal-line:nth-child(4) { transition-delay: 390ms; }
+
+/* ══════════════════════════════════
+   Marquee
+══════════════════════════════════ */
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-inner {
+  animation: marqueeScroll 28s linear infinite;
+}
+.marquee-track:hover .marquee-inner {
+  animation-play-state: paused;
+}
+
+/* ══════════════════════════════════
+   Scroll hint line
+══════════════════════════════════ */
+
+@keyframes scrollPulse {
+  0%   { transform: scaleY(0); transform-origin: top;    opacity: 1; }
+  49%  { transform: scaleY(1); transform-origin: top;    opacity: 1; }
+  50%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+.scroll-line {
+  width: 1px;
+  height: 36px;
+  background: var(--muted);
+  margin: 6px auto 0;
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════
+   Card hover transitions (fallback)
+   — used when GSAP is not loaded
+══════════════════════════════════ */
+
+.solution-card,
+.case-card,
+.wwd-card {
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.3s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.3s;
+}
+
+/* ══════════════════════════════════
+   Header transition
+══════════════════════════════════ */
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.header { animation: fadeDown 0.5s cubic-bezier(0.4,0,0.2,1) both; }

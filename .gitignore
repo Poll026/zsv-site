@@ -1,0 +1,19 @@
+# Brainstorm scratch files (visual companion mockups)
+.superpowers/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+node_modules/
