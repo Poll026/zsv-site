@@ -10,6 +10,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Montserrat:ital,wght@1,800;1,900&display=swap" rel="stylesheet">
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+
 <style>
 :root{
   --cream:#FAF8F2;
@@ -36,7 +41,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;color:var(--graphite);background:var(--obsidian);line-height:1.5;-webkit-font-smoothing:antialiased}
+body{font-family:'Montserrat',sans-serif;color:var(--graphite);background:var(--obsidian);line-height:1.5;-webkit-font-smoothing:antialiased;position:relative}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
@@ -352,6 +357,110 @@ footer{background:var(--footer-bg);padding:80px 56px 0;color:var(--ivory)}
 .btn-up:hover{border-color:var(--gold)}
 
 /* ============================================================
+   Scroll Thread (Variant 1 — золотая нить через всю страницу)
+   ============================================================ */
+.scroll-thread{position:fixed;left:24px;top:0;bottom:0;width:24px;z-index:50;pointer-events:none}
+.thread-track{position:absolute;left:50%;top:96px;bottom:96px;width:1px;background:rgba(201,169,97,0.18);transform:translateX(-50%)}
+.thread-fill{position:absolute;left:50%;top:96px;width:1.5px;background:var(--gold);height:0;transform:translateX(-50%);box-shadow:0 0 6px var(--gold-glow);transition:height 0.12s linear;border-radius:1px}
+.thread-nodes{position:absolute;left:0;right:0;top:96px;bottom:96px}
+.thread-node{position:absolute;left:50%;width:5px;height:5px;border-radius:50%;border:1px solid var(--gold);background:transparent;transform:translate(-50%, -50%);transition:all 0.3s ease}
+.thread-node.passed{background:var(--gold)}
+.thread-node.active{width:10px;height:10px;background:var(--gold);box-shadow:0 0 10px var(--gold-glow);animation:thread-pulse 1.6s ease-in-out infinite}
+@keyframes thread-pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,97,0.5)}50%{box-shadow:0 0 0 8px rgba(201,169,97,0)}}
+.thread-meta{position:fixed;left:18px;bottom:32px;font-size:10px;font-weight:700;letter-spacing:2.5px;color:var(--gold);font-family:'Montserrat',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;z-index:50}
+.thread-meta .thread-sep{opacity:0.4;font-weight:400;font-size:9px}
+.thread-meta .thread-total{opacity:0.6;font-size:9px}
+@media (max-width: 768px){.scroll-thread,.thread-meta{display:none}}
+
+/* ============================================================
+   Snake DNA Line — двойная золотая змеящаяся ДНК через центры блоков
+   ============================================================ */
+.snake-line{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;overflow:hidden}
+.snake-line svg{width:100%;height:100%;display:block;overflow:visible}
+.snake-path{fill:none;stroke:var(--gold);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:8 6;filter:drop-shadow(0 0 3px var(--gold-glow))}
+.snake-path-a{opacity:0.8;animation:snake-flow-a 9s linear infinite}
+.snake-path-b{opacity:0.5;animation:snake-flow-b 9s linear infinite}
+@keyframes snake-flow-a{to{stroke-dashoffset:-140}}
+@keyframes snake-flow-b{to{stroke-dashoffset:140}}
+.snake-rungs line{stroke:var(--gold);stroke-width:0.6;opacity:0.3}
+.snake-nodes circle{fill:var(--gold);filter:drop-shadow(0 0 6px var(--gold-glow));animation:snake-pulse 2.6s ease-in-out infinite}
+.snake-nodes circle:nth-child(2n){animation-delay:0.4s}
+.snake-nodes circle:nth-child(3n){animation-delay:0.9s}
+@keyframes snake-pulse{0%,100%{opacity:0.45}50%{opacity:1}}
+@media (max-width: 768px){.snake-line{display:none}}
+
+/* Магнитный transition для кнопок (плавное возвращение) */
+.btn{transition:transform 0.3s cubic-bezier(0.2,0.9,0.3,1.2),background 0.25s ease,color 0.25s ease}
+
+/* TextType — мигающий курсор для typewriter-эффекта */
+.tt-cursor{display:inline-block;color:var(--gold);font-weight:300;margin:0 0.04em;animation:tt-blink 0.85s ease-in-out infinite;will-change:opacity}
+@keyframes tt-blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* LetterGlitch — глитч-сетка символов в футере (адаптация react-bits/LetterGlitch) */
+footer{position:relative;overflow:hidden}
+footer > .container{position:relative;z-index:2}
+.glitch-mount{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0.22;mix-blend-mode:screen;mask-image:radial-gradient(ellipse at center,#000 35%,rgba(0,0,0,0) 95%);-webkit-mask-image:radial-gradient(ellipse at center,#000 35%,rgba(0,0,0,0) 95%)}
+.glitch-mount canvas{display:block;width:100%;height:100%}
+@media (max-width: 768px){.glitch-mount{display:none}}
+
+/* ============================================================
+   MagicRings — анимированные концентрические кольца на блоке 07
+   ============================================================ */
+#approach{position:relative;overflow:hidden}
+#approach .container-narrow{position:relative;z-index:2}
+.magic-rings-mount{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.magic-rings-mount canvas{width:100%!important;height:100%!important;display:block}
+@media (max-width: 768px){.magic-rings-mount{display:none}}
+
+/* ============================================================
+   LineWaves — диагональные волны под формой в блоке 09 (адаптация react-bits/LineWaves)
+   ============================================================ */
+#contact{position:relative;overflow:hidden}
+#contact .container{position:relative;z-index:2}
+.line-waves-mount{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;mix-blend-mode:screen;opacity:0.1}
+.line-waves-mount canvas{width:100%!important;height:100%!important;display:block}
+@media (max-width: 768px){.line-waves-mount{display:none}}
+
+/* ============================================================
+   Threads — нити по диагонали в блоке 03 (адаптация react-bits/Threads)
+   ============================================================ */
+#lifecycle{position:relative;overflow:hidden}
+#lifecycle .container{position:relative;z-index:2}
+.threads-mount{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0.6;mix-blend-mode:screen;mask-image:linear-gradient(135deg,#000 0%,rgba(0,0,0,0.7) 25%,rgba(0,0,0,0.25) 45%,rgba(0,0,0,0.25) 55%,rgba(0,0,0,0.7) 75%,#000 100%);-webkit-mask-image:linear-gradient(135deg,#000 0%,rgba(0,0,0,0.7) 25%,rgba(0,0,0,0.25) 45%,rgba(0,0,0,0.25) 55%,rgba(0,0,0,0.7) 75%,#000 100%)}
+.threads-mount canvas{width:100%!important;height:100%!important;display:block}
+@media (max-width: 768px){.threads-mount{display:none}}
+
+/* ============================================================
+   Particles — плавающие золотые частицы в блоке 05 (адаптация react-bits/Particles)
+   ============================================================ */
+#cases{position:relative;overflow:hidden}
+#cases .container{position:relative;z-index:2}
+.particles-mount{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;mix-blend-mode:screen;opacity:0.75}
+.particles-mount canvas{width:100%!important;height:100%!important;display:block}
+@media (max-width: 768px){.particles-mount{display:none}}
+
+/* ============================================================
+   LightRays — золотые лучи света сверху в hero (адаптация react-bits/LightRays)
+   ============================================================ */
+#hero{position:relative;overflow:hidden}
+#hero .container{position:relative;z-index:2}
+.light-rays-mount{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;mix-blend-mode:screen;opacity:1;mask-image:linear-gradient(to right,rgba(0,0,0,0.22) 0%,rgba(0,0,0,0.52) 26%,#000 50%);-webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0.22) 0%,rgba(0,0,0,0.52) 26%,#000 50%)}
+.light-rays-mount canvas{width:100%!important;height:100%!important;display:block}
+@media (max-width: 768px){.light-rays-mount{display:none}}
+
+/* ============================================================
+   Custom cursor (золотая точка + кольцо-следующее с инерцией)
+   ============================================================ */
+.cursor-dot,.cursor-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:10001;border-radius:50%;will-change:transform}
+.cursor-dot{width:6px;height:6px;background:var(--gold);transform:translate(-50%,-50%);transition:width 0.18s ease,height 0.18s ease,opacity 0.2s ease;box-shadow:0 0 6px var(--gold-glow)}
+.cursor-ring{width:34px;height:34px;border:1px solid var(--gold);transform:translate(-50%,-50%);transition:width 0.28s ease,height 0.28s ease,background 0.28s ease,border-width 0.2s ease}
+.cursor-ring.hover{width:60px;height:60px;background:rgba(201,169,97,0.12);border-width:1.5px}
+.cursor-ring.click{width:24px;height:24px}
+.cursor-dot.hover{width:0;height:0;opacity:0}
+@media (hover: none),(max-width: 768px){.cursor-dot,.cursor-ring{display:none}body,a,button,.service-card,.audience-card,.case-card,.follow-card,.topic,.chip,[data-set-theme]{cursor:auto}}
+@media (hover: hover) and (min-width: 769px){body{cursor:none}a,button,input,textarea,label,.service-card,.audience-card,.case-card,.follow-card,.topic,.chip,[data-set-theme],.btn-up{cursor:none}}
+
+/* ============================================================
    Theme switcher
    ============================================================ */
 .theme-switcher{position:sticky;top:0;z-index:10000;display:flex;justify-content:flex-end;align-items:center;gap:2px;background:rgba(8,8,8,0.92);padding:8px 24px;border-bottom:1px solid rgba(201,169,97,0.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
@@ -453,10 +562,34 @@ body[data-theme="color3"]{
   <button class="theme-btn" data-set-theme="color3">COLOR 3</button>
 </div>
 
+<div class="scroll-thread" aria-hidden="true">
+  <div class="thread-track"></div>
+  <div class="thread-fill"></div>
+  <div class="thread-nodes"></div>
+</div>
+<div class="thread-meta" aria-hidden="true">
+  <span class="thread-current">01</span>
+  <span class="thread-sep">/</span>
+  <span class="thread-total">11</span>
+</div>
+
+<div class="snake-line" aria-hidden="true">
+  <svg preserveAspectRatio="none">
+    <path class="snake-path snake-path-a"></path>
+    <path class="snake-path snake-path-b"></path>
+    <g class="snake-rungs"></g>
+    <g class="snake-nodes"></g>
+  </svg>
+</div>
+
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
 <!-- ===========================================================
      01 · HERO
      =========================================================== -->
 <section id="hero" class="dark">
+  <div class="light-rays-mount" aria-hidden="true"></div>
   <div class="container">
     <div class="hero-grid">
       <div>
@@ -538,6 +671,7 @@ body[data-theme="color3"]{
      03 · ПОЛНЫЙ ЦИКЛ
      =========================================================== -->
 <section id="lifecycle" class="dark" style="padding:80px 56px 88px">
+  <div class="threads-mount" aria-hidden="true"></div>
   <div class="container">
     <div class="lifecycle-head">
       <div>
@@ -688,6 +822,7 @@ body[data-theme="color3"]{
      05 · КЕЙСЫ
      =========================================================== -->
 <section id="cases" class="dark">
+  <div class="particles-mount" aria-hidden="true"></div>
   <div class="container">
     <div class="section-head">
       <div>
@@ -811,6 +946,7 @@ body[data-theme="color3"]{
      07 · ПОДХОД
      =========================================================== -->
 <section id="approach" class="dark">
+  <div class="magic-rings-mount" aria-hidden="true"></div>
   <div class="container-narrow">
     <div class="section-head">
       <div>
@@ -933,6 +1069,7 @@ body[data-theme="color3"]{
      09 · ФОРМА
      =========================================================== -->
 <section id="contact" class="dark">
+  <div class="line-waves-mount" aria-hidden="true"></div>
   <div class="container">
     <div class="form-grid">
 
@@ -1123,6 +1260,7 @@ body[data-theme="color3"]{
      10 · ФУТЕР
      =========================================================== -->
 <footer>
+  <div class="glitch-mount" aria-hidden="true"><canvas></canvas></div>
   <div class="container">
     <div class="footer-grid">
 
@@ -1203,6 +1341,1226 @@ body[data-theme="color3"]{
 </footer>
 
 <script>
+// Lenis — плавный скролл премиум-уровня
+if(window.Lenis && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const lenis = new window.Lenis({lerp: 0.09, duration: 1.2, smoothWheel: true});
+  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  if(window.gsap && window.ScrollTrigger){
+    lenis.on('scroll', window.ScrollTrigger.update);
+  }
+}
+
+// GSAP ScrollTrigger — reveal крупных заголовков, char-by-char для манифеста, fade подконтента
+if(window.gsap && window.ScrollTrigger){
+  window.gsap.registerPlugin(window.ScrollTrigger);
+
+  // SplitText (vanilla) — разбивает текст на символы, сохраняя вложенные spans (gold, muted-strike) и <br>
+  function splitTextChars(element){
+    if(!element || element.dataset.split === '1') return [];
+    element.dataset.split = '1';
+    const chars = [];
+    function walk(node){
+      Array.from(node.childNodes).forEach(child => {
+        if(child.nodeType === 3){
+          const text = child.textContent;
+          const frag = document.createDocumentFragment();
+          for(let i = 0; i < text.length; i++){
+            const ch = text[i];
+            if(ch === ' ' || ch === ' '){
+              frag.appendChild(document.createTextNode(ch));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'split-char';
+              span.style.display = 'inline-block';
+              span.style.willChange = 'transform, opacity';
+              span.textContent = ch;
+              frag.appendChild(span);
+              chars.push(span);
+            }
+          }
+          child.parentNode.replaceChild(frag, child);
+        } else if(child.nodeType === 1 && child.tagName !== 'BR'){
+          walk(child);
+        }
+      });
+    }
+    walk(element);
+    return chars;
+  }
+
+  // Цели для char-by-char (манифест-цитата + заглавие выступлений)
+  const splitTargets = [
+    document.querySelector('#about .quote'),
+    document.querySelector('#speaking .section-title')
+  ].filter(Boolean);
+  const splitSet = new Set(splitTargets);
+
+  // Большие заголовки (исключаем те, что идут через SplitText) — slide-up на элемент целиком
+  const bigTitles = document.querySelectorAll('.section-title, .hero-title, .hero-title-2, .quote, .principle-title, .footer-slogan');
+  bigTitles.forEach(el => {
+    if(splitSet.has(el)) return;
+    window.gsap.from(el, {
+      y: 80, opacity: 0, duration: 1.15, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+    });
+  });
+
+  // Typewriter (TextType) для манифест-текстов: печатает буква-за-буквой с мигающим курсором
+  splitTargets.forEach(el => {
+    const chars = splitTextChars(el);
+    if(!chars.length) return;
+    // Прячем все символы изначально (preserve layout через visibility)
+    chars.forEach(c => { c.style.visibility = 'hidden'; });
+    // Курсор-палочка перед первым символом
+    const cursor = document.createElement('span');
+    cursor.className = 'tt-cursor';
+    cursor.textContent = '|';
+    if(chars[0].parentNode){
+      chars[0].parentNode.insertBefore(cursor, chars[0]);
+    }
+    // Запуск печати при попадании в viewport (один раз)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          observer.disconnect();
+          let i = 0;
+          function step(){
+            if(i >= chars.length){
+              return;
+            }
+            chars[i].style.visibility = 'visible';
+            if(chars[i].parentNode){
+              chars[i].parentNode.insertBefore(cursor, chars[i].nextSibling);
+            }
+            i++;
+            // Чуть-чуть рандомизируем скорость для естественности
+            const delay = 38 + Math.random() * 14;
+            setTimeout(step, delay);
+          }
+          setTimeout(step, 250);
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(el);
+  });
+
+  // Подзаголовки и подконтент — мягкий fade
+  const subContent = document.querySelectorAll('.overline, .section-side, .hero-sub, .hero-cta-row, .hero-stats, .signature-grid, .scale-wrap, .warning-cards, .services-grid, .cases-grid, .speak-grid, .principle-text, .audience-grid, .follow-grid, .form-grid, .footer-grid, .speak-bottom, .audience-bottom, .services-bottom, .cases-bottom, .approach-bottom, .form-sub, .trust, .form');
+  subContent.forEach(el => {
+    window.gsap.from(el, {
+      y: 30, opacity: 0, duration: 0.85, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+    });
+  });
+}
+
+// Snake DNA Line — двойная нить ДНК через центры блоков
+(function initSnakeLine(){
+  const svg = document.querySelector('.snake-line svg');
+  const pathA = document.querySelector('.snake-path-a');
+  const pathB = document.querySelector('.snake-path-b');
+  const rungsG = document.querySelector('.snake-rungs');
+  const nodesG = document.querySelector('.snake-nodes');
+  if(!svg || !pathA || !pathB || !rungsG || !nodesG) return;
+
+  function buildPath(){
+    const sectionIds = ['hero','about','lifecycle','services','cases','speaking','approach','audience','contact','follow'];
+    const elements = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+    const footer = document.querySelector('footer');
+    if(footer) elements.push(footer);
+    if(!elements.length) return;
+
+    const W = document.body.clientWidth;
+    const H = document.body.scrollHeight;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', H);
+
+    const offsetLeft = W * 0.22;
+    const offsetRight = W * 0.78;
+    const o = 10;
+
+    const points = elements.map((el, i) => ({
+      x: i % 2 === 0 ? offsetLeft : offsetRight,
+      y: el.offsetTop + el.offsetHeight / 2
+    }));
+
+    let dA = `M ${points[0].x.toFixed(1)} ${(points[0].y - o).toFixed(1)}`;
+    let dB = `M ${points[0].x.toFixed(1)} ${(points[0].y + o).toFixed(1)}`;
+    for(let i = 1; i < points.length; i++){
+      const prev = points[i-1];
+      const curr = points[i];
+      const yMid = (prev.y + curr.y) / 2;
+      dA += ` C ${prev.x.toFixed(1)} ${(yMid - o).toFixed(1)}, ${curr.x.toFixed(1)} ${(yMid - o).toFixed(1)}, ${curr.x.toFixed(1)} ${(curr.y - o).toFixed(1)}`;
+      dB += ` C ${prev.x.toFixed(1)} ${(yMid + o).toFixed(1)}, ${curr.x.toFixed(1)} ${(yMid + o).toFixed(1)}, ${curr.x.toFixed(1)} ${(curr.y + o).toFixed(1)}`;
+    }
+    pathA.setAttribute('d', dA);
+    pathB.setAttribute('d', dB);
+
+    let rungs = '';
+    let nodes = '';
+    points.forEach(p => {
+      rungs += `<line x1="${p.x.toFixed(1)}" y1="${(p.y - o).toFixed(1)}" x2="${p.x.toFixed(1)}" y2="${(p.y + o).toFixed(1)}"/>`;
+      nodes += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4"/>`;
+    });
+    rungsG.innerHTML = rungs;
+    nodesG.innerHTML = nodes;
+  }
+
+  window.addEventListener('load', buildPath);
+  window.addEventListener('resize', buildPath);
+  buildPath();
+})();
+
+// LineWaves (адаптация react-bits/LineWaves, оригинал на OGL → vanilla Three.js) — диагональные волны в блоке 09
+(function initLineWaves(){
+  const mount = document.querySelector('.line-waves-mount');
+  if(!mount || !window.THREE) return;
+
+  const params = {
+    speed: 0.3,
+    innerLineCount: 32,
+    outerLineCount: 36,
+    warpIntensity: 1.0,
+    rotation: -45,
+    edgeFadeWidth: 0.0,
+    colorCycleSpeed: 1.0,
+    brightness: 0.18,
+    color1: '#C9A961',
+    color2: '#F0D9A0',
+    color3: '#9C7E48',
+    enableMouseInteraction: true,
+    mouseInfluence: 2.0
+  };
+
+  function hexToVec3(hex){
+    const h = hex.replace('#', '');
+    return [
+      parseInt(h.slice(0, 2), 16) / 255,
+      parseInt(h.slice(2, 4), 16) / 255,
+      parseInt(h.slice(4, 6), 16) / 255
+    ];
+  }
+
+  const vertexShader = `
+    varying vec2 vUv;
+    void main(){
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+
+  const fragmentShader = `
+    precision highp float;
+    uniform float uTime;
+    uniform vec3 uResolution;
+    uniform float uSpeed;
+    uniform float uInnerLines;
+    uniform float uOuterLines;
+    uniform float uWarpIntensity;
+    uniform float uRotation;
+    uniform float uEdgeFadeWidth;
+    uniform float uColorCycleSpeed;
+    uniform float uBrightness;
+    uniform vec3 uColor1;
+    uniform vec3 uColor2;
+    uniform vec3 uColor3;
+    uniform vec2 uMouse;
+    uniform float uMouseInfluence;
+    uniform bool uEnableMouse;
+    #define HALF_PI 1.5707963
+    float hashF(float n){ return fract(sin(n * 127.1) * 43758.5453123); }
+    float smoothNoise(float x){
+      float i = floor(x);
+      float f = fract(x);
+      float u = f * f * (3.0 - 2.0 * f);
+      return mix(hashF(i), hashF(i + 1.0), u);
+    }
+    float displaceA(float coord, float t){
+      float r = sin(coord * 2.123) * 0.2;
+      r += sin(coord * 3.234 + t * 4.345) * 0.1;
+      r += sin(coord * 0.589 + t * 0.934) * 0.5;
+      return r;
+    }
+    float displaceB(float coord, float t){
+      float r = sin(coord * 1.345) * 0.3;
+      r += sin(coord * 2.734 + t * 3.345) * 0.2;
+      r += sin(coord * 0.189 + t * 0.934) * 0.3;
+      return r;
+    }
+    vec2 rotate2D(vec2 p, float angle){
+      float c = cos(angle);
+      float s = sin(angle);
+      return vec2(p.x * c - p.y * s, p.x * s + p.y * c);
+    }
+    void main(){
+      vec2 coords = gl_FragCoord.xy / uResolution.xy;
+      coords = coords * 2.0 - 1.0;
+      coords = rotate2D(coords, uRotation);
+      float halfT = uTime * uSpeed * 0.5;
+      float fullT = uTime * uSpeed;
+      float mouseWarp = 0.0;
+      if(uEnableMouse){
+        vec2 mPos = rotate2D(uMouse * 2.0 - 1.0, uRotation);
+        float mDist = length(coords - mPos);
+        mouseWarp = uMouseInfluence * exp(-mDist * mDist * 4.0);
+      }
+      float warpAx = coords.x + displaceA(coords.y, halfT) * uWarpIntensity + mouseWarp;
+      float warpAy = coords.y - displaceA(coords.x * cos(fullT) * 1.235, halfT) * uWarpIntensity;
+      float warpBx = coords.x + displaceB(coords.y, halfT) * uWarpIntensity + mouseWarp;
+      float warpBy = coords.y - displaceB(coords.x * sin(fullT) * 1.235, halfT) * uWarpIntensity;
+      vec2 fieldA = vec2(warpAx, warpAy);
+      vec2 fieldB = vec2(warpBx, warpBy);
+      vec2 blended = mix(fieldA, fieldB, mix(fieldA, fieldB, 0.5));
+      float fadeTop = smoothstep(uEdgeFadeWidth, uEdgeFadeWidth + 0.4, blended.y);
+      float fadeBottom = smoothstep(-uEdgeFadeWidth, -(uEdgeFadeWidth + 0.4), blended.y);
+      float vMask = 1.0 - max(fadeTop, fadeBottom);
+      float tileCount = mix(uOuterLines, uInnerLines, vMask);
+      float scaledY = blended.y * tileCount;
+      float nY = smoothNoise(abs(scaledY));
+      float ridge = pow(step(abs(nY - blended.x) * 2.0, HALF_PI) * cos(2.0 * (nY - blended.x)), 5.0);
+      float lines = 0.0;
+      for(float i = 1.0; i < 3.0; i += 1.0){
+        lines += pow(max(fract(scaledY), fract(-scaledY)), i * 2.0);
+      }
+      float pattern = vMask * lines;
+      float cycleT = fullT * uColorCycleSpeed;
+      float rChannel = (pattern + lines * ridge) * (cos(blended.y + cycleT * 0.234) * 0.5 + 1.0);
+      float gChannel = (pattern + vMask * ridge) * (sin(blended.x + cycleT * 1.745) * 0.5 + 1.0);
+      float bChannel = (pattern + lines * ridge) * (cos(blended.x + cycleT * 0.534) * 0.5 + 1.0);
+      vec3 col = (rChannel * uColor1 + gChannel * uColor2 + bChannel * uColor3) * uBrightness;
+      float alpha = clamp(length(col), 0.0, 1.0);
+      gl_FragColor = vec4(col, alpha);
+    }
+  `;
+
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, premultipliedAlpha: false }); } catch(e){ return; }
+  renderer.setClearColor(0x000000, 0);
+  mount.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  camera.position.z = 1;
+
+  const c1 = hexToVec3(params.color1);
+  const c2 = hexToVec3(params.color2);
+  const c3 = hexToVec3(params.color3);
+  const rotationRad = params.rotation * Math.PI / 180;
+
+  const uniforms = {
+    uTime: { value: 0 },
+    uResolution: { value: new THREE.Vector3(1, 1, 1) },
+    uSpeed: { value: params.speed },
+    uInnerLines: { value: params.innerLineCount },
+    uOuterLines: { value: params.outerLineCount },
+    uWarpIntensity: { value: params.warpIntensity },
+    uRotation: { value: rotationRad },
+    uEdgeFadeWidth: { value: params.edgeFadeWidth },
+    uColorCycleSpeed: { value: params.colorCycleSpeed },
+    uBrightness: { value: params.brightness },
+    uColor1: { value: new THREE.Vector3(c1[0], c1[1], c1[2]) },
+    uColor2: { value: new THREE.Vector3(c2[0], c2[1], c2[2]) },
+    uColor3: { value: new THREE.Vector3(c3[0], c3[1], c3[2]) },
+    uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+    uMouseInfluence: { value: params.mouseInfluence },
+    uEnableMouse: { value: params.enableMouseInteraction }
+  };
+
+  const material = new THREE.ShaderMaterial({
+    uniforms, vertexShader, fragmentShader,
+    transparent: true, depthTest: false
+  });
+  const geometry = new THREE.PlaneGeometry(2, 2);
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  function setSize(){
+    const w = mount.clientWidth, h = mount.clientHeight;
+    if(!w || !h) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(dpr);
+    uniforms.uResolution.value.set(w * dpr, h * dpr, (w * dpr) / (h * dpr));
+  }
+  setSize();
+  window.addEventListener('resize', setSize);
+  if(window.ResizeObserver) new ResizeObserver(setSize).observe(mount);
+
+  let curMouse = [0.5, 0.5], tarMouse = [0.5, 0.5];
+  if(params.enableMouseInteraction){
+    const section = document.getElementById('contact');
+    if(section){
+      section.addEventListener('mousemove', (e) => {
+        const rect = mount.getBoundingClientRect();
+        tarMouse[0] = (e.clientX - rect.left) / rect.width;
+        tarMouse[1] = 1 - (e.clientY - rect.top) / rect.height;
+      });
+      section.addEventListener('mouseleave', () => { tarMouse[0] = 0.5; tarMouse[1] = 0.5; });
+    }
+  }
+
+  function animate(t){
+    requestAnimationFrame(animate);
+    uniforms.uTime.value = t * 0.001;
+    if(params.enableMouseInteraction){
+      curMouse[0] += 0.05 * (tarMouse[0] - curMouse[0]);
+      curMouse[1] += 0.05 * (tarMouse[1] - curMouse[1]);
+      uniforms.uMouse.value.set(curMouse[0], curMouse[1]);
+    }
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(animate);
+})();
+
+// Threads (адаптация react-bits/Threads, оригинал на OGL → vanilla Three.js) — диагональные нити в блоке 03
+(function initThreads(){
+  const mount = document.querySelector('.threads-mount');
+  if(!mount || !window.THREE) return;
+
+  const params = {
+    color: [0.95, 0.78, 0.42],
+    amplitude: 1.2,
+    distance: 0,
+    enableMouseInteraction: true
+  };
+
+  const vertexShader = `
+    varying vec2 vUv;
+    void main(){
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+
+  const fragmentShader = `
+    precision highp float;
+    uniform float iTime;
+    uniform vec3 iResolution;
+    uniform vec3 uColor;
+    uniform float uAmplitude;
+    uniform float uDistance;
+    uniform vec2 uMouse;
+    #define PI 3.1415926538
+    const int u_line_count = 40;
+    const float u_line_width = 7.0;
+    const float u_line_blur = 10.0;
+    float Perlin2D(vec2 P){
+      vec2 Pi = floor(P);
+      vec4 Pf_Pfmin1 = P.xyxy - vec4(Pi, Pi + 1.0);
+      vec4 Pt = vec4(Pi.xy, Pi.xy + 1.0);
+      Pt = Pt - floor(Pt * (1.0 / 71.0)) * 71.0;
+      Pt += vec2(26.0, 161.0).xyxy;
+      Pt *= Pt;
+      Pt = Pt.xzxz * Pt.yyww;
+      vec4 hash_x = fract(Pt * (1.0 / 951.135664));
+      vec4 hash_y = fract(Pt * (1.0 / 642.949883));
+      vec4 grad_x = hash_x - 0.49999;
+      vec4 grad_y = hash_y - 0.49999;
+      vec4 grad_results = inversesqrt(grad_x * grad_x + grad_y * grad_y) * (grad_x * Pf_Pfmin1.xzxz + grad_y * Pf_Pfmin1.yyww);
+      grad_results *= 1.4142135623730950;
+      vec2 blend = Pf_Pfmin1.xy * Pf_Pfmin1.xy * Pf_Pfmin1.xy * (Pf_Pfmin1.xy * (Pf_Pfmin1.xy * 6.0 - 15.0) + 10.0);
+      vec4 blend2 = vec4(blend, vec2(1.0 - blend));
+      return dot(grad_results, blend2.zxzx * blend2.wwyy);
+    }
+    float pixelSize(float count, vec2 resolution){
+      return (1.0 / max(resolution.x, resolution.y)) * count;
+    }
+    float lineFn(vec2 st, float width, float perc, float offset, vec2 mouse, float time, float amplitude, float distance){
+      float split_offset = (perc * 0.4);
+      float split_point = 0.1 + split_offset;
+      float amplitude_normal = smoothstep(split_point, 0.7, st.x);
+      float amplitude_strength = 0.5;
+      float finalAmplitude = amplitude_normal * amplitude_strength * amplitude * (1.0 + (mouse.y - 0.5) * 0.2);
+      float time_scaled = time / 10.0 + (mouse.x - 0.5) * 1.0;
+      float blur = smoothstep(split_point, split_point + 0.05, st.x) * perc;
+      float xnoise = mix(
+        Perlin2D(vec2(time_scaled, st.x + perc) * 2.5),
+        Perlin2D(vec2(time_scaled, st.x + time_scaled) * 3.5) / 1.5,
+        st.x * 0.3
+      );
+      float y = 0.5 + (perc - 0.5) * distance + xnoise / 2.0 * finalAmplitude;
+      float line_start = smoothstep(y + (width / 2.0) + (u_line_blur * pixelSize(1.0, iResolution.xy) * blur), y, st.y);
+      float line_end = smoothstep(y, y - (width / 2.0) - (u_line_blur * pixelSize(1.0, iResolution.xy) * blur), st.y);
+      return clamp((line_start - line_end) * (1.0 - smoothstep(0.0, 1.0, pow(perc, 0.3))), 0.0, 1.0);
+    }
+    void main(){
+      vec2 uv = gl_FragCoord.xy / iResolution.xy;
+      float line_strength = 1.0;
+      for(int i = 0; i < u_line_count; i++){
+        float p = float(i) / float(u_line_count);
+        line_strength *= (1.0 - lineFn(
+          uv,
+          u_line_width * pixelSize(1.0, iResolution.xy) * (1.0 - p),
+          p,
+          (PI * 1.0) * p,
+          uMouse, iTime, uAmplitude, uDistance
+        ));
+      }
+      float colorVal = 1.0 - line_strength;
+      gl_FragColor = vec4(uColor * colorVal, colorVal);
+    }
+  `;
+
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); } catch(e){ return; }
+  renderer.setClearColor(0x000000, 0);
+  mount.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  camera.position.z = 1;
+
+  const uniforms = {
+    iTime: { value: 0 },
+    iResolution: { value: new THREE.Vector3(1, 1, 1) },
+    uColor: { value: new THREE.Vector3(params.color[0], params.color[1], params.color[2]) },
+    uAmplitude: { value: params.amplitude },
+    uDistance: { value: params.distance },
+    uMouse: { value: new THREE.Vector2(0.5, 0.5) }
+  };
+
+  const material = new THREE.ShaderMaterial({
+    uniforms, vertexShader, fragmentShader,
+    transparent: true, depthTest: false
+  });
+  const geometry = new THREE.PlaneGeometry(2, 2);
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  function setSize(){
+    const w = mount.clientWidth, h = mount.clientHeight;
+    if(!w || !h) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(dpr);
+    uniforms.iResolution.value.set(w * dpr, h * dpr, (w * dpr) / (h * dpr));
+  }
+  setSize();
+  window.addEventListener('resize', setSize);
+  if(window.ResizeObserver) new ResizeObserver(setSize).observe(mount);
+
+  let curMouse = [0.5, 0.5], tarMouse = [0.5, 0.5];
+  if(params.enableMouseInteraction){
+    const section = document.getElementById('lifecycle');
+    if(section){
+      section.addEventListener('mousemove', (e) => {
+        const rect = mount.getBoundingClientRect();
+        tarMouse[0] = (e.clientX - rect.left) / rect.width;
+        tarMouse[1] = 1 - (e.clientY - rect.top) / rect.height;
+      });
+      section.addEventListener('mouseleave', () => { tarMouse[0] = 0.5; tarMouse[1] = 0.5; });
+    }
+  }
+
+  function animate(t){
+    requestAnimationFrame(animate);
+    if(params.enableMouseInteraction){
+      curMouse[0] += 0.05 * (tarMouse[0] - curMouse[0]);
+      curMouse[1] += 0.05 * (tarMouse[1] - curMouse[1]);
+      uniforms.uMouse.value.set(curMouse[0], curMouse[1]);
+    }
+    uniforms.iTime.value = t * 0.001;
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(animate);
+})();
+
+// Particles (адаптация react-bits/Particles + связанный граф) — крупные золотые звёзды-узлы с линиями в блоке 05
+(function initParticles(){
+  const mount = document.querySelector('.particles-mount');
+  if(!mount || !window.THREE) return;
+
+  const params = {
+    particleCount: 280,
+    particleSpread: 11,
+    speed: 0.1,
+    particleColors: ['#C9A961', '#D6B870', '#F0D9A0', '#9C7E48'],
+    moveParticlesOnHover: true,
+    particleHoverFactor: 0.7,
+    alphaParticles: true,
+    particleBaseSize: 280,
+    sizeRandomness: 1,
+    cameraDistance: 20,
+    disableRotation: false,
+    pixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+    connectKNearest: 3,
+    connectMaxDistance: 0.42,
+    lineOpacity: 0.18
+  };
+
+  const vertexShader = `
+    precision highp float;
+    uniform mat4 modelMatrix;
+    uniform mat4 viewMatrix;
+    uniform mat4 projectionMatrix;
+    attribute vec3 position;
+    attribute vec4 random;
+    attribute vec3 color;
+    uniform float uTime;
+    uniform float uSpread;
+    uniform float uBaseSize;
+    uniform float uSizeRandomness;
+    varying vec4 vRandom;
+    varying vec3 vColor;
+    void main(){
+      vRandom = random;
+      vColor = color;
+      vec3 pos = position * uSpread;
+      pos.z *= 10.0;
+      vec4 mPos = modelMatrix * vec4(pos, 1.0);
+      float t = uTime;
+      mPos.x += sin(t * random.z + 6.28 * random.w) * mix(0.1, 1.5, random.x);
+      mPos.y += sin(t * random.y + 6.28 * random.x) * mix(0.1, 1.5, random.w);
+      mPos.z += sin(t * random.w + 6.28 * random.y) * mix(0.1, 1.5, random.z);
+      vec4 mvPos = viewMatrix * mPos;
+      if(uSizeRandomness == 0.0){
+        gl_PointSize = uBaseSize;
+      } else {
+        gl_PointSize = (uBaseSize * (1.0 + uSizeRandomness * (random.x - 0.5))) / length(mvPos.xyz);
+      }
+      gl_Position = projectionMatrix * mvPos;
+    }
+  `;
+
+  const fragmentShader = `
+    precision highp float;
+    uniform float uTime;
+    uniform float uAlphaParticles;
+    varying vec4 vRandom;
+    varying vec3 vColor;
+    void main(){
+      vec2 uv = gl_PointCoord.xy;
+      float d = length(uv - vec2(0.5));
+      if(uAlphaParticles < 0.5){
+        if(d > 0.5) discard;
+        gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), 1.0);
+      } else {
+        float circle = smoothstep(0.5, 0.4, d) * 0.8;
+        gl_FragColor = vec4(vColor + 0.2 * sin(uv.yxx + uTime + vRandom.y * 6.28), circle);
+      }
+    }
+  `;
+
+  function hexToRgb(hex){
+    let h = hex.replace(/^#/, '');
+    if(h.length === 3) h = h.split('').map(c => c + c).join('');
+    const i = parseInt(h, 16);
+    return [((i >> 16) & 255) / 255, ((i >> 8) & 255) / 255, (i & 255) / 255];
+  }
+
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, depth: false }); } catch(e){ return; }
+  renderer.setClearColor(0x000000, 0);
+  renderer.setPixelRatio(params.pixelRatio);
+  mount.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(15, 1, 0.1, 1000);
+  camera.position.set(0, 0, params.cameraDistance);
+
+  const count = params.particleCount;
+  const positions = new Float32Array(count * 3);
+  const randoms = new Float32Array(count * 4);
+  const colors = new Float32Array(count * 3);
+  const palette = (params.particleColors && params.particleColors.length) ? params.particleColors : ['#ffffff'];
+
+  for(let i = 0; i < count; i++){
+    let x, y, z, len;
+    do {
+      x = Math.random() * 2 - 1;
+      y = Math.random() * 2 - 1;
+      z = Math.random() * 2 - 1;
+      len = x*x + y*y + z*z;
+    } while(len > 1 || len === 0);
+    const r = Math.cbrt(Math.random());
+    positions[i*3] = x * r; positions[i*3+1] = y * r; positions[i*3+2] = z * r;
+    randoms[i*4] = Math.random(); randoms[i*4+1] = Math.random();
+    randoms[i*4+2] = Math.random(); randoms[i*4+3] = Math.random();
+    const col = hexToRgb(palette[Math.floor(Math.random() * palette.length)]);
+    colors[i*3] = col[0]; colors[i*3+1] = col[1]; colors[i*3+2] = col[2];
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('random', new THREE.BufferAttribute(randoms, 4));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  const material = new THREE.RawShaderMaterial({
+    vertexShader, fragmentShader,
+    uniforms: {
+      uTime: { value: 0 },
+      uSpread: { value: params.particleSpread },
+      uBaseSize: { value: params.particleBaseSize * params.pixelRatio },
+      uSizeRandomness: { value: params.sizeRandomness },
+      uAlphaParticles: { value: params.alphaParticles ? 1 : 0 }
+    },
+    transparent: true,
+    depthTest: false,
+    depthWrite: false
+  });
+
+  // Build connection lines (k-nearest neighbor graph)
+  const lineEndPositions = [];
+  const lineEndRandoms = [];
+  const lineEndColors = [];
+  const edgeSet = new Set();
+  const maxD2 = params.connectMaxDistance * params.connectMaxDistance;
+  for(let i = 0; i < count; i++){
+    const dists = [];
+    for(let j = 0; j < count; j++){
+      if(i === j) continue;
+      const dx = positions[i*3] - positions[j*3];
+      const dy = positions[i*3+1] - positions[j*3+1];
+      const dz = positions[i*3+2] - positions[j*3+2];
+      dists.push({ idx: j, d2: dx*dx + dy*dy + dz*dz });
+    }
+    dists.sort((a, b) => a.d2 - b.d2);
+    for(let n = 0; n < Math.min(params.connectKNearest, dists.length); n++){
+      if(dists[n].d2 > maxD2) break;
+      const j = dists[n].idx;
+      const key = i < j ? (i + '-' + j) : (j + '-' + i);
+      if(edgeSet.has(key)) continue;
+      edgeSet.add(key);
+      lineEndPositions.push(positions[i*3], positions[i*3+1], positions[i*3+2]);
+      lineEndPositions.push(positions[j*3], positions[j*3+1], positions[j*3+2]);
+      lineEndRandoms.push(randoms[i*4], randoms[i*4+1], randoms[i*4+2], randoms[i*4+3]);
+      lineEndRandoms.push(randoms[j*4], randoms[j*4+1], randoms[j*4+2], randoms[j*4+3]);
+      lineEndColors.push(colors[i*3], colors[i*3+1], colors[i*3+2]);
+      lineEndColors.push(colors[j*3], colors[j*3+1], colors[j*3+2]);
+    }
+  }
+
+  const lineGeometry = new THREE.BufferGeometry();
+  lineGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(lineEndPositions), 3));
+  lineGeometry.setAttribute('random', new THREE.BufferAttribute(new Float32Array(lineEndRandoms), 4));
+  lineGeometry.setAttribute('color', new THREE.BufferAttribute(new Float32Array(lineEndColors), 3));
+
+  const lineVertexShader = `
+    precision highp float;
+    uniform mat4 modelMatrix;
+    uniform mat4 viewMatrix;
+    uniform mat4 projectionMatrix;
+    attribute vec3 position;
+    attribute vec4 random;
+    attribute vec3 color;
+    uniform float uTime;
+    uniform float uSpread;
+    varying vec3 vColor;
+    void main(){
+      vColor = color;
+      vec3 pos = position * uSpread;
+      pos.z *= 10.0;
+      vec4 mPos = modelMatrix * vec4(pos, 1.0);
+      float t = uTime;
+      mPos.x += sin(t * random.z + 6.28 * random.w) * mix(0.1, 1.5, random.x);
+      mPos.y += sin(t * random.y + 6.28 * random.x) * mix(0.1, 1.5, random.w);
+      mPos.z += sin(t * random.w + 6.28 * random.y) * mix(0.1, 1.5, random.z);
+      gl_Position = projectionMatrix * viewMatrix * mPos;
+    }
+  `;
+  const lineFragmentShader = `
+    precision highp float;
+    varying vec3 vColor;
+    uniform float uLineOpacity;
+    void main(){
+      gl_FragColor = vec4(vColor * 0.85, uLineOpacity);
+    }
+  `;
+  const lineMaterial = new THREE.RawShaderMaterial({
+    vertexShader: lineVertexShader,
+    fragmentShader: lineFragmentShader,
+    uniforms: {
+      uTime: { value: 0 },
+      uSpread: { value: params.particleSpread },
+      uLineOpacity: { value: params.lineOpacity }
+    },
+    transparent: true,
+    depthTest: false,
+    depthWrite: false
+  });
+
+  const group = new THREE.Group();
+  scene.add(group);
+  const points = new THREE.Points(geometry, material);
+  group.add(points);
+  const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+  group.add(lines);
+
+  const mouse = { x: 0, y: 0 };
+  function setSize(){
+    const w = mount.clientWidth, h = mount.clientHeight;
+    if(!w || !h) return;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  setSize();
+  window.addEventListener('resize', setSize);
+  if(window.ResizeObserver) new ResizeObserver(setSize).observe(mount);
+
+  const section = document.getElementById('cases');
+  if(params.moveParticlesOnHover && section){
+    section.addEventListener('mousemove', (e) => {
+      const rect = mount.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+    });
+  }
+
+  let elapsed = 0, lastTime = performance.now();
+  function animate(t){
+    requestAnimationFrame(animate);
+    const delta = t - lastTime;
+    lastTime = t;
+    elapsed += delta * params.speed;
+    const tSec = elapsed * 0.001;
+    material.uniforms.uTime.value = tSec;
+    lineMaterial.uniforms.uTime.value = tSec;
+    if(params.moveParticlesOnHover){
+      group.position.x = -mouse.x * params.particleHoverFactor;
+      group.position.y = -mouse.y * params.particleHoverFactor;
+    }
+    if(!params.disableRotation){
+      group.rotation.x = Math.sin(elapsed * 0.0002) * 0.1;
+      group.rotation.y = Math.cos(elapsed * 0.0005) * 0.15;
+      group.rotation.z += 0.01 * params.speed;
+    }
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(animate);
+})();
+
+// LightRays (адаптация react-bits/LightRays, оригинал на OGL → vanilla Three.js) — золотые лучи света в hero
+(function initLightRays(){
+  const mount = document.querySelector('.light-rays-mount');
+  if(!mount || !window.THREE) return;
+
+  const params = {
+    raysOrigin: 'top-center',
+    raysColor: '#F8E8C4',
+    raysSpeed: 1,
+    lightSpread: 1,
+    rayLength: 2.6,
+    pulsating: false,
+    fadeDistance: 1.4,
+    saturation: 1.0,
+    followMouse: true,
+    mouseInfluence: 0.15,
+    noiseAmount: 0.04,
+    distortion: 0.0
+  };
+
+  function hexToRgb(hex){
+    const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1];
+  }
+
+  function getAnchorAndDir(origin, w, h){
+    const outside = 0.2;
+    switch(origin){
+      case 'top-left': return { anchor: [0, -outside * h], dir: [0, 1] };
+      case 'top-right': return { anchor: [w, -outside * h], dir: [0, 1] };
+      case 'left': return { anchor: [-outside * w, 0.5 * h], dir: [1, 0] };
+      case 'right': return { anchor: [(1 + outside) * w, 0.5 * h], dir: [-1, 0] };
+      case 'bottom-left': return { anchor: [0, (1 + outside) * h], dir: [0, -1] };
+      case 'bottom-center': return { anchor: [0.5 * w, (1 + outside) * h], dir: [0, -1] };
+      case 'bottom-right': return { anchor: [w, (1 + outside) * h], dir: [0, -1] };
+      default: return { anchor: [0.5 * w, -outside * h], dir: [0, 1] };
+    }
+  }
+
+  const vertexShader = `
+    varying vec2 vUv;
+    void main(){
+      vUv = position.xy * 0.5 + 0.5;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+  const fragmentShader = `
+    precision highp float;
+    uniform float iTime;
+    uniform vec2 iResolution;
+    uniform vec2 rayPos;
+    uniform vec2 rayDir;
+    uniform vec3 raysColor;
+    uniform float raysSpeed;
+    uniform float lightSpread;
+    uniform float rayLength;
+    uniform float pulsating;
+    uniform float fadeDistance;
+    uniform float saturation;
+    uniform vec2 mousePos;
+    uniform float mouseInfluence;
+    uniform float noiseAmount;
+    uniform float distortion;
+    varying vec2 vUv;
+    float noise(vec2 st){
+      return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+    }
+    float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord, float seedA, float seedB, float speed){
+      vec2 sourceToCoord = coord - raySource;
+      vec2 dirNorm = normalize(sourceToCoord);
+      float cosAngle = dot(dirNorm, rayRefDirection);
+      float distortedAngle = cosAngle + distortion * sin(iTime * 2.0 + length(sourceToCoord) * 0.01) * 0.2;
+      float spreadFactor = pow(max(distortedAngle, 0.0), 1.0 / max(lightSpread, 0.001));
+      float distance = length(sourceToCoord);
+      float maxDistance = iResolution.x * rayLength;
+      float lengthFalloff = clamp((maxDistance - distance) / maxDistance, 0.0, 1.0);
+      float fadeFalloff = clamp((iResolution.x * fadeDistance - distance) / (iResolution.x * fadeDistance), 0.5, 1.0);
+      float pulse = pulsating > 0.5 ? (0.8 + 0.2 * sin(iTime * speed * 3.0)) : 1.0;
+      float baseStrength = clamp(
+        (0.45 + 0.15 * sin(distortedAngle * seedA + iTime * speed)) +
+        (0.3 + 0.2 * cos(-distortedAngle * seedB + iTime * speed)),
+        0.0, 1.0
+      );
+      return baseStrength * lengthFalloff * fadeFalloff * spreadFactor * pulse;
+    }
+    void main(){
+      vec2 fragCoord = gl_FragCoord.xy;
+      vec2 coord = vec2(fragCoord.x, iResolution.y - fragCoord.y);
+      vec2 finalRayDir = rayDir;
+      if(mouseInfluence > 0.0){
+        vec2 mouseScreenPos = mousePos * iResolution.xy;
+        vec2 mouseDirection = normalize(mouseScreenPos - rayPos);
+        finalRayDir = normalize(mix(rayDir, mouseDirection, mouseInfluence));
+      }
+      vec4 rays1 = vec4(1.0) * rayStrength(rayPos, finalRayDir, coord, 36.2214, 21.11349, 1.5 * raysSpeed);
+      vec4 rays2 = vec4(1.0) * rayStrength(rayPos, finalRayDir, coord, 22.3991, 18.0234, 1.1 * raysSpeed);
+      vec4 fragColor = rays1 * 0.5 + rays2 * 0.4;
+      if(noiseAmount > 0.0){
+        float n = noise(coord * 0.01 + iTime * 0.1);
+        fragColor.rgb *= (1.0 - noiseAmount + noiseAmount * n);
+      }
+      float brightness = 1.0 - (coord.y / iResolution.y);
+      fragColor.x *= 0.1 + brightness * 0.8;
+      fragColor.y *= 0.3 + brightness * 0.6;
+      fragColor.z *= 0.5 + brightness * 0.5;
+      if(saturation != 1.0){
+        float gray = dot(fragColor.rgb, vec3(0.299, 0.587, 0.114));
+        fragColor.rgb = mix(vec3(gray), fragColor.rgb, saturation);
+      }
+      fragColor.rgb *= raysColor;
+      gl_FragColor = fragColor;
+    }
+  `;
+
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); } catch(e){ return; }
+  renderer.setClearColor(0x000000, 0);
+  mount.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  camera.position.z = 1;
+
+  const colorRgb = hexToRgb(params.raysColor);
+  const uniforms = {
+    iTime: { value: 0 },
+    iResolution: { value: new THREE.Vector2(1, 1) },
+    rayPos: { value: new THREE.Vector2(0, 0) },
+    rayDir: { value: new THREE.Vector2(0, 1) },
+    raysColor: { value: new THREE.Vector3(colorRgb[0], colorRgb[1], colorRgb[2]) },
+    raysSpeed: { value: params.raysSpeed },
+    lightSpread: { value: params.lightSpread },
+    rayLength: { value: params.rayLength },
+    pulsating: { value: params.pulsating ? 1.0 : 0.0 },
+    fadeDistance: { value: params.fadeDistance },
+    saturation: { value: params.saturation },
+    mousePos: { value: new THREE.Vector2(0.5, 0.5) },
+    mouseInfluence: { value: params.mouseInfluence },
+    noiseAmount: { value: params.noiseAmount },
+    distortion: { value: params.distortion }
+  };
+
+  const material = new THREE.ShaderMaterial({
+    uniforms, vertexShader, fragmentShader,
+    transparent: true, depthTest: false
+  });
+  const geometry = new THREE.PlaneGeometry(2, 2);
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  function updatePlacement(){
+    const wCSS = mount.clientWidth, hCSS = mount.clientHeight;
+    if(!wCSS || !hCSS) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    renderer.setSize(wCSS, hCSS);
+    renderer.setPixelRatio(dpr);
+    const w = wCSS * dpr, h = hCSS * dpr;
+    uniforms.iResolution.value.set(w, h);
+    const ad = getAnchorAndDir(params.raysOrigin, w, h);
+    uniforms.rayPos.value.set(ad.anchor[0], ad.anchor[1]);
+    uniforms.rayDir.value.set(ad.dir[0], ad.dir[1]);
+  }
+  updatePlacement();
+  window.addEventListener('resize', updatePlacement);
+  if(window.ResizeObserver) new ResizeObserver(updatePlacement).observe(mount);
+
+  let mX = 0.5, mY = 0.5, smX = 0.5, smY = 0.5;
+  if(params.followMouse){
+    window.addEventListener('mousemove', (e) => {
+      const rect = mount.getBoundingClientRect();
+      mX = (e.clientX - rect.left) / rect.width;
+      mY = (e.clientY - rect.top) / rect.height;
+    });
+  }
+
+  function animate(t){
+    requestAnimationFrame(animate);
+    uniforms.iTime.value = t * 0.001;
+    if(params.followMouse && params.mouseInfluence > 0){
+      smX = smX * 0.92 + mX * 0.08;
+      smY = smY * 0.92 + mY * 0.08;
+      uniforms.mousePos.value.set(smX, smY);
+    }
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(animate);
+})();
+
+// MagicRings (адаптация react-bits/MagicRings для vanilla JS) — анимированные кольца на блоке 07
+(function initMagicRings(){
+  const mount = document.querySelector('.magic-rings-mount');
+  if(!mount || !window.THREE) return;
+
+  const vertexShader = `
+    void main() { gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
+  `;
+  const fragmentShader = `
+    precision highp float;
+    uniform float uTime, uAttenuation, uLineThickness;
+    uniform float uBaseRadius, uRadiusStep, uScaleRate;
+    uniform float uOpacity, uNoiseAmount, uRotation, uRingGap;
+    uniform float uFadeIn, uFadeOut;
+    uniform float uMouseInfluence, uHoverAmount, uHoverScale, uParallax, uBurst;
+    uniform vec2 uResolution, uMouse;
+    uniform vec3 uColor, uColorTwo;
+    uniform int uRingCount;
+    const float HP = 1.5707963;
+    const float CYCLE = 3.45;
+    float fade(float t) {
+      return t < uFadeIn ? smoothstep(0.0, uFadeIn, t) : 1.0 - smoothstep(uFadeOut, CYCLE - 0.2, t);
+    }
+    float ring(vec2 p, float ri, float cut, float t0, float px) {
+      float t = mod(uTime + t0, CYCLE);
+      float r = ri + t / CYCLE * uScaleRate;
+      float d = abs(length(p) - r);
+      float a = atan(abs(p.y), abs(p.x)) / HP;
+      float th = max(1.0 - a, 0.5) * px * uLineThickness;
+      float h = (1.0 - smoothstep(th, th * 1.5, d)) + 1.0;
+      d += pow(cut * a, 3.0) * r;
+      return h * exp(-uAttenuation * d) * fade(t);
+    }
+    void main() {
+      float px = 1.0 / min(uResolution.x, uResolution.y);
+      vec2 p = (gl_FragCoord.xy - 0.5 * uResolution.xy) * px;
+      float cr = cos(uRotation), sr = sin(uRotation);
+      p = mat2(cr, -sr, sr, cr) * p;
+      p -= uMouse * uMouseInfluence;
+      float sc = mix(1.0, uHoverScale, uHoverAmount) + uBurst * 0.3;
+      p /= sc;
+      vec3 c = vec3(0.0);
+      float rcf = max(float(uRingCount) - 1.0, 1.0);
+      for (int i = 0; i < 10; i++) {
+        if (i >= uRingCount) break;
+        float fi = float(i);
+        vec2 pr = p - fi * uParallax * uMouse;
+        vec3 rc = mix(uColor, uColorTwo, fi / rcf);
+        c = mix(c, rc, vec3(ring(pr, uBaseRadius + fi * uRadiusStep, pow(uRingGap, fi), i == 0 ? 0.0 : 2.95 * fi, px)));
+      }
+      c *= 1.0 + uBurst * 2.0;
+      float n = fract(sin(dot(gl_FragCoord.xy + uTime * 100.0, vec2(12.9898, 78.233))) * 43758.5453);
+      c += (n - 0.5) * uNoiseAmount;
+      gl_FragColor = vec4(c, max(c.r, max(c.g, c.b)) * uOpacity);
+    }
+  `;
+
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); } catch(e){ return; }
+  if(renderer.capabilities && renderer.capabilities.isWebGL2 === false){ renderer.dispose(); return; }
+  renderer.setClearColor(0x000000, 0);
+  mount.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 10);
+  camera.position.z = 1;
+
+  const params = {
+    color: '#C9A961', colorTwo: '#6B4A1A', speed: 0.5, ringCount: 6,
+    attenuation: 9, lineThickness: 2, baseRadius: 0.32, radiusStep: 0.09,
+    scaleRate: 0.1, opacity: 0.55, noiseAmount: 0.05, rotation: 0,
+    ringGap: 1.5, fadeIn: 0.7, fadeOut: 0.5,
+    followMouse: true, mouseInfluence: 0.18, hoverScale: 1.15, parallax: 0.04,
+    clickBurst: false,
+  };
+
+  const uniforms = {
+    uTime: { value: 0 }, uAttenuation: { value: params.attenuation },
+    uResolution: { value: new THREE.Vector2() },
+    uColor: { value: new THREE.Color(params.color) },
+    uColorTwo: { value: new THREE.Color(params.colorTwo) },
+    uLineThickness: { value: params.lineThickness },
+    uBaseRadius: { value: params.baseRadius },
+    uRadiusStep: { value: params.radiusStep },
+    uScaleRate: { value: params.scaleRate },
+    uRingCount: { value: params.ringCount },
+    uOpacity: { value: params.opacity },
+    uNoiseAmount: { value: params.noiseAmount },
+    uRotation: { value: params.rotation * Math.PI / 180 },
+    uRingGap: { value: params.ringGap },
+    uFadeIn: { value: params.fadeIn },
+    uFadeOut: { value: params.fadeOut },
+    uMouse: { value: new THREE.Vector2() },
+    uMouseInfluence: { value: 0 },
+    uHoverAmount: { value: 0 },
+    uHoverScale: { value: params.hoverScale },
+    uParallax: { value: params.parallax },
+    uBurst: { value: 0 },
+  };
+
+  const material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms, transparent: true });
+  const quad = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material);
+  scene.add(quad);
+
+  let mx = 0, my = 0, smx = 0, smy = 0, hover = 0, isHover = false;
+
+  function resize(){
+    const w = mount.clientWidth, h = mount.clientHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(dpr);
+    uniforms.uResolution.value.set(w * dpr, h * dpr);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  if(window.ResizeObserver){ new ResizeObserver(resize).observe(mount); }
+
+  const section = document.getElementById('approach');
+  if(section){
+    section.addEventListener('mousemove', (e) => {
+      const rect = mount.getBoundingClientRect();
+      mx = (e.clientX - rect.left) / rect.width - 0.5;
+      my = -((e.clientY - rect.top) / rect.height - 0.5);
+      isHover = true;
+    });
+    section.addEventListener('mouseleave', () => { isHover = false; mx = 0; my = 0; });
+  }
+
+  function animate(t){
+    requestAnimationFrame(animate);
+    smx += (mx - smx) * 0.08;
+    smy += (my - smy) * 0.08;
+    hover += ((isHover ? 1 : 0) - hover) * 0.08;
+    uniforms.uTime.value = t * 0.001 * params.speed;
+    uniforms.uMouse.value.set(smx, smy);
+    uniforms.uMouseInfluence.value = params.followMouse ? params.mouseInfluence : 0;
+    uniforms.uHoverAmount.value = hover;
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(animate);
+})();
+
+// Магнитные кнопки — слегка следуют за курсором при наведении
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = `translate(${(x * 0.25).toFixed(1)}px, ${(y * 0.25).toFixed(1)}px)`;
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+
+// Custom cursor — золотая точка + следующее кольцо с инерцией
+(function initCustomCursor(){
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  if(!dot || !ring) return;
+  if(!window.matchMedia('(hover: hover)').matches) return;
+
+  let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+  let ringX = mouseX, ringY = mouseY;
+  let visible = false;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    if(!visible){ visible = true; dot.style.opacity = ring.style.opacity = '1'; }
+  });
+
+  function tick(){
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  const interactiveSelector = 'a, button, input, textarea, label, .service-card, .audience-card, .case-card, .follow-card, .topic, .chip, [data-set-theme], .btn-up';
+  document.querySelectorAll(interactiveSelector).forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.classList.add('hover'); dot.classList.add('hover'); });
+    el.addEventListener('mouseleave', () => { ring.classList.remove('hover'); dot.classList.remove('hover'); });
+  });
+
+  document.addEventListener('mousedown', () => ring.classList.add('click'));
+  document.addEventListener('mouseup', () => ring.classList.remove('click'));
+  document.addEventListener('mouseleave', () => { dot.style.opacity = ring.style.opacity = '0'; visible = false; });
+})();
+
+// Scroll Thread (Variant 1) — золотая нить-индикатор скролла
+(function initScrollThread(){
+  const sectionIds = ['hero','about','lifecycle','services','cases','speaking','approach','audience','contact','follow'];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  const footer = document.querySelector('footer');
+  if(footer) sections.push(footer);
+
+  const nodesContainer = document.querySelector('.thread-nodes');
+  const fill = document.querySelector('.thread-fill');
+  const currentLabel = document.querySelector('.thread-current');
+  if(!nodesContainer || !fill || !currentLabel || !sections.length) return;
+
+  const nodes = sections.map(() => {
+    const el = document.createElement('div');
+    el.className = 'thread-node';
+    nodesContainer.appendChild(el);
+    return el;
+  });
+
+  function positionNodes(){
+    const max = Math.max(1, document.body.scrollHeight - window.innerHeight);
+    sections.forEach((sec, i) => {
+      const offset = Math.min(sec.offsetTop, max);
+      nodes[i].style.top = (offset / max * 100) + '%';
+    });
+  }
+
+  function updateProgress(){
+    const max = Math.max(1, document.body.scrollHeight - window.innerHeight);
+    const pct = Math.min(1, Math.max(0, window.scrollY / max));
+    fill.style.height = (pct * 100) + '%';
+
+    let activeIdx = 0;
+    sections.forEach((sec, i) => {
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= window.innerHeight * 0.4) activeIdx = i;
+    });
+
+    nodes.forEach((node, i) => {
+      node.classList.toggle('passed', i < activeIdx);
+      node.classList.toggle('active', i === activeIdx);
+    });
+
+    currentLabel.textContent = String(activeIdx + 1).padStart(2, '0');
+  }
+
+  positionNodes();
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, {passive: true});
+  window.addEventListener('resize', () => { positionNodes(); updateProgress(); });
+})();
+
 // Переключатель цветовой темы
 document.querySelectorAll('[data-set-theme]').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1210,6 +2568,139 @@ document.querySelectorAll('[data-set-theme]').forEach(btn => {
     document.querySelectorAll('[data-set-theme]').forEach(b => b.classList.toggle('active', b === btn));
   });
 });
+
+// LetterGlitch (адаптация react-bits/LetterGlitch) — глитч-сетка символов в футере, приглушённо
+(function initLetterGlitch(){
+  const mount = document.querySelector('.glitch-mount');
+  if(!mount) return;
+  const canvas = mount.querySelector('canvas');
+  if(!canvas) return;
+
+  const params = {
+    glitchColors: ['#3a2f1a', '#7A5828', '#C9A961', '#F0D9A0'],
+    glitchSpeed: 90,
+    smooth: true,
+    characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789'
+  };
+
+  const fontSize = 13;
+  const charWidth = 9;
+  const charHeight = 16;
+  const symbols = Array.from(params.characters);
+
+  let ctx = canvas.getContext('2d');
+  let letters = [];
+  let grid = { columns: 0, rows: 0 };
+  let lastTime = Date.now();
+
+  function rndChar(){ return symbols[Math.floor(Math.random() * symbols.length)]; }
+  function rndColor(){ return params.glitchColors[Math.floor(Math.random() * params.glitchColors.length)]; }
+  function hexToRgb(hex){
+    const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return m ? { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) } : null;
+  }
+  function rgbStrToObj(s){
+    const m = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/.exec(s);
+    return m ? { r: +m[1], g: +m[2], b: +m[3] } : null;
+  }
+  function parseColor(s){
+    return s.startsWith('#') ? hexToRgb(s) : rgbStrToObj(s);
+  }
+  function lerpColor(s, e, f){
+    return `rgb(${Math.round(s.r + (e.r - s.r) * f)}, ${Math.round(s.g + (e.g - s.g) * f)}, ${Math.round(s.b + (e.b - s.b) * f)})`;
+  }
+  function calcGrid(w, h){
+    return { columns: Math.ceil(w / charWidth), rows: Math.ceil(h / charHeight) };
+  }
+  function initLetters(cols, rows){
+    grid = { columns: cols, rows };
+    letters = Array.from({ length: cols * rows }, () => ({
+      char: rndChar(),
+      color: rndColor(),
+      targetColor: rndColor(),
+      colorProgress: 1
+    }));
+  }
+  function resize(){
+    const parent = canvas.parentElement;
+    if(!parent) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = parent.getBoundingClientRect();
+    if(!rect.width || !rect.height) return;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const g = calcGrid(rect.width, rect.height);
+    initLetters(g.columns, g.rows);
+    draw();
+  }
+  function draw(){
+    if(!letters.length) return;
+    const rect = canvas.getBoundingClientRect();
+    ctx.clearRect(0, 0, rect.width, rect.height);
+    ctx.font = `${fontSize}px monospace`;
+    ctx.textBaseline = 'top';
+    for(let i = 0; i < letters.length; i++){
+      const x = (i % grid.columns) * charWidth;
+      const y = Math.floor(i / grid.columns) * charHeight;
+      ctx.fillStyle = letters[i].color;
+      ctx.fillText(letters[i].char, x, y);
+    }
+  }
+  function updateLetters(){
+    if(!letters.length) return;
+    const count = Math.max(1, Math.floor(letters.length * 0.04));
+    for(let i = 0; i < count; i++){
+      const idx = Math.floor(Math.random() * letters.length);
+      if(!letters[idx]) continue;
+      letters[idx].char = rndChar();
+      letters[idx].targetColor = rndColor();
+      if(!params.smooth){
+        letters[idx].color = letters[idx].targetColor;
+        letters[idx].colorProgress = 1;
+      } else {
+        letters[idx].colorProgress = 0;
+      }
+    }
+  }
+  function smoothStep(){
+    let needs = false;
+    for(let i = 0; i < letters.length; i++){
+      const L = letters[i];
+      if(L.colorProgress < 1){
+        L.colorProgress += 0.05;
+        if(L.colorProgress > 1) L.colorProgress = 1;
+        const s = parseColor(L.color);
+        const e = parseColor(L.targetColor);
+        if(s && e){
+          L.color = lerpColor(s, e, L.colorProgress);
+          needs = true;
+        }
+      }
+    }
+    if(needs) draw();
+  }
+  function tick(){
+    const now = Date.now();
+    if(now - lastTime >= params.glitchSpeed){
+      updateLetters();
+      draw();
+      lastTime = now;
+    }
+    if(params.smooth) smoothStep();
+    requestAnimationFrame(tick);
+  }
+
+  resize();
+  tick();
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 100);
+  });
+})();
 
 // Чипы выбора типа запроса
 document.querySelectorAll('.chip').forEach(chip => {
